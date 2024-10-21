@@ -21,6 +21,7 @@ const messageRegex = /^[A-Za-z0-9À-ÖØ-ÿ\s.,?!@#$%^&*()_:~[\]|\\\/]{10,}$/;
 const nameRegex = /^[A-Za-zÀ-ÖØ-ÿ\s'-.]{2,}$/;
 const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 const RECAPTCHA_SECRET_KEY = process.env.RECAPTCHA_SECRET_KEY;
+const emailToSend = process.env.EMAIL_TO_APPLY!;
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 // Disable Next.js body parsing, since formidable will handle the form data
@@ -112,7 +113,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           // Send the email
           const mailState = await resend.emails.send({
             from: 'Bewerbung <onboarding@resend.dev>',
-            to: ['niklas.schwarz1@yahoo.de'],
+            to: [emailToSend],
             subject: 'Bewerbung über Formular',
             attachments: attachments, // Pass attachments here
             html: `<h2>Bewerbung: ${job}</h2><p>Von: ${name} ${surname}</p><p>E-Mail: ${email}</p><p>Hat Ihnen eine Bewerbung gesendet.</p>`,
