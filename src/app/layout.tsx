@@ -18,7 +18,6 @@ export const metadata: Metadata = {
   title: 'ATBS Abkanttechnik Braunschweig - Blechverarbeitung',
   description: 'Die Lösung gegen lange Durchlaufzeiten und hohe Beschaffungskosten für Ihre Metallteile ist hier. ATBS Braunschweig ist Ihr zuverlässiger Partner für die Fertigung metallischer Komponenten durch Schweißen, Kanten, Lasern. ',
   keywords: ['Blechverarbeitung', 'Metallverarbeitung', 'Stahl', 'Edelstahl', 'Aluminium', 'Schweißen', 'Kanten', 'Lasern'],
-  icons: './ATBS_logo_clean.png'
 }
 
 export default function RootLayout({
