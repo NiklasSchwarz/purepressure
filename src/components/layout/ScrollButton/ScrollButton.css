@@ -1,0 +1,16 @@
+
+.layoutScrollBtn {
+    /* Basic styling for the button */
+    position: fixed; /* Changed to fixed to allow sliding effect */
+    right: 0;
+    bottom: 0;
+    @apply m-10 p-5 text-fg text-xl aspect-square bg-neutral bg-opacity-10 rounded-full shadow-lg hover:shadow-xl hover:bg-opacity-20 backdrop-blur-md transition-all duration-200 ease-in-out;
+}
+
+.layoutBtnContainer {
+    position: fixed; /* Ensure the container is fixed */
+    bottom: 0;
+    right: 0;
+    width: fit-content;
+    transition: transform 0.3s ease-in-out; /* Smooth transition for sliding effect */
+}

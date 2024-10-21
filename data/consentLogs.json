@@ -1,0 +1,22 @@
+[
+  {
+    "ip": "::ffff:127.0.0.1",
+    "consent": "All",
+    "timestamp": "2024-10-11T13:13:50.294Z"
+  },
+  {
+    "ip": "::ffff:127.0.0.1",
+    "consent": "Necessary",
+    "timestamp": "2024-10-11T13:34:13.070Z"
+  },
+  {
+    "ip": "::ffff:127.0.0.1",
+    "consent": "All",
+    "timestamp": "2024-10-18T06:19:59.298Z"
+  },
+  {
+    "ip": "::ffff:127.0.0.1",
+    "consent": "Necessary",
+    "timestamp": "2024-10-18T12:53:17.066Z"
+  }
+]

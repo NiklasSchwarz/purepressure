@@ -1,0 +1,13 @@
+.uxContact {
+    @apply flex flex-col justify-evenly text-center align-middle py-8 items-center;
+}
+
+.uxContactBtn {
+    transition: all 500ms ease-in-out;
+    @apply mt-10 py-4 px-6 rounded-md bg-primary font-semibold text-lg shadow-lg w-fit text-light;
+  }
+
+.uxContactBtn:hover {
+    transform: translateY(-2px);
+    @apply bg-primary2 shadow-xl;
+  }

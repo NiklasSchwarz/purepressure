@@ -1,0 +1,29 @@
+.uxModal {
+    width: 90%;
+    max-width: 700px;
+    z-index: 100000000000;
+
+    position: fixed;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    transition: opacity 250ms ease-in-out;
+
+    border-radius: 10px;
+    padding: 1rem 4rem;
+    margin: auto;
+
+    @apply text-fg;
+}
+
+.uxModalError {
+    @apply bg-red-300 bg-opacity-90;
+}
+
+.uxModalNeutral {
+    @apply bg-yellow-300 bg-opacity-90;
+}
+.uxModalSuccess {
+    @apply bg-green-300 bg-opacity-90;
+}

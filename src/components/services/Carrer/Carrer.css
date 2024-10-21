@@ -1,0 +1,224 @@
+.job {
+    padding: 16px;
+    margin: 16px 0;
+    cursor: pointer;
+    transition: all 250ms ease-in-out;
+    @apply bg-fg bg-opacity-5;
+}
+  
+.job:hover {
+    @apply bg-fg bg-opacity-10;
+}
+
+.job.active {
+  @apply bg-primary bg-opacity-10;
+}
+
+.job.active:hover {
+  @apply bg-opacity-20;
+}
+  
+.jobHeader {
+  cursor: pointer;
+  margin: 1rem;
+}
+
+.CarrerButtonBtn {
+  transition: all 500ms ease-in-out;
+  @apply mt-6 py-4 px-6 rounded-md bg-primary font-semibold text-lg shadow-lg w-fit text-light;
+}
+
+.CarrerButtonBtn:hover {
+  transform: translateY(-2px);
+  @apply bg-primary2 shadow-xl;
+}
+
+.jobHeading {
+  text-wrap: wrap;
+  cursor: pointer;
+  word-break: normal;
+  margin-bottom: 1rem;
+  hyphens: auto;
+  @apply text-xl;
+}
+
+.jobDetails {
+  max-height: 0;
+  margin: 1rem;
+  overflow: hidden;
+  cursor: pointer;
+  transition: max-height 750ms ease-in-out;
+}
+
+.show {
+  max-height: 4000px; /* Ein ausreichend großer Wert, um alle Details anzuzeigen */
+}
+
+.jobContainer {
+  position:relative;
+  width: 80%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  margin-top: 4rem;
+  margin-bottom: 8rem;
+}
+
+.jobContainer.hide {
+  overflow: hidden;
+}
+
+.jobDetails ul {
+  cursor: pointer;
+  list-style-type: disc;
+  margin-left: 20px;
+  margin-bottom: 1rem;
+}
+
+.jobDetailsHeader {
+  cursor: pointer;
+  font-size: medium;
+  text-wrap: wrap;
+  hyphens: auto;
+}
+
+.jobDetails ul li{
+  @apply text-sm text-fg;
+}
+
+.p-bewerbung {
+  min-width: 315px;
+  @apply max-w-2xl w-3/5;
+}
+
+/* POP UP Bewerbungsstyle */
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeout {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+}
+
+.Overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.207);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fadein 500ms ease;
+  visibility: visible;
+  opacity: 1;
+  overflow: hidden;
+  transition: visibility 0s, opacity 500ms ease;
+}
+
+.Overlay.hidden {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s 500ms, opacity 500ms ease;
+}
+
+.popup {
+  background: rgb(var(--color-bg));
+  z-index: 1000000;
+  border-radius: 8px;
+  max-width: 800px;
+  height: 90vh;
+  width: 100%;
+  overflow-y: auto;
+  animation: fadeIn 500ms ease;
+
+  @apply flex flex-col justify-evenly px-10 m-4 md:m-10 py-16 sm:py-0 ;
+}
+
+.popup.hidden {
+  animation: fadeOut 500ms ease;
+}
+
+.buttonCarrer {
+  padding: 10px 20px;
+  color: rgb(var(--color-light));
+  border: none;
+  border-radius: 5px;
+  height: 3rem;
+}
+
+.close-button {
+  padding: 10px 20px;
+  background-color: red;
+  border: none;
+  height: 3rem;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.form-parent > * {
+  @apply my-1 text-sm;
+}
+
+.form-parent > label {
+  padding-bottom: 2px;
+  padding-top: 1px;
+}
+.form-parent > .input-field {
+  background-color: rgb(var(--color-bg));
+  border: solid 1px rgb(var(--color-fg));
+  border-radius: 5px  5px 0px 0px;
+  border-bottom: 2px rgb(var(--color-secondary)) solid;
+  @apply text-fg px-1;
+}
+
+.form-parent > .input-file {
+  padding-top: 1px;
+}
+
+.form-parent > select {
+  padding: 1px;
+  border-radius: 5px  5px 0px 0px;
+  background-color: rgb(var(--color-bg));
+  border: solid 1px rgb(var(--color-fg));
+  border-radius: 5px  5px 0px 0px;
+  border-bottom: 2px rgb(var(--color-secondary)) solid;
+  @apply text-fg px-1;
+
+}
+
+@media (min-width: 640px) {
+  .popup {
+    max-height: 550px;
+  }
+}
+
+/* Google reCAPTCHA styles */
+.grecaptcha-badge {
+  width: 256px !important;
+  overflow: visible !important;
+  transition: all 0.3s ease !important;
+  left: calc(100% - 70px) !important;
+  top: 12px !important;
+}
+.grecaptcha-badge:hover {
+  transform: translateX(-186px) !important;
+}

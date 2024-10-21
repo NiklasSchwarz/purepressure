@@ -1,0 +1,66 @@
+.uxGridContainer {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(280px, 1fr));
+  padding-top: 8rem;
+  gap: 8rem 5rem;
+  margin: auto;
+}
+
+.uxGridItem {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  cursor: pointer;
+  gap: 1rem;
+  padding: 0rem 0rem 1rem 0rem;
+  height: 200px;
+  width: 260px;
+  
+  text-align: center;
+  border-radius: 8px;
+
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  color: white;
+  transition: all 250ms ease-in-out; 
+
+  @apply bg-fg bg-opacity-30 text-fg;
+  }
+
+  .uxGridItem > h4 {
+    cursor: pointer;
+  }
+
+  .uxGridItem > img {
+    aspect-ratio: 6/4;
+    object-fit: cover;
+    width: 100%;
+    background-color: bisque;
+  }
+
+  .uxGridItem:hover {
+    scale: 1.1;
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
+    background-color: rgb(var(--color-primary));
+  }
+  
+  /* Responsiveness */
+  @media (max-width: 1100px) {
+    .uxGridContainer {
+      /*padding: 8rem 8%;*/
+      gap: 5rem 3rem;
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .uxGridContainer::after {
+      /*padding: 8rem 8%;*/
+      display: none;
+    }
+  }
+  
+  @media (max-width: 600px) {
+    .uxGridContainer {
+      max-width: 400px;
+      padding: 8rem 2rem;
+      grid-template-columns: 1fr;
+    }
+  }

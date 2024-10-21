@@ -1,0 +1,34 @@
+.uxTextImg {
+    width: 80%;
+    display: flex;
+    flex-direction: row; /* Standardmäßig nebeneinander */
+    justify-content: space-evenly;
+    gap: 4rem;
+    align-items: center;
+    box-sizing: content-box;
+    padding: 2rem;
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+  }
+  
+  .uxTextImgImg {
+    width: clamp(250px, 70%, 500px);
+  }
+  
+  .uxTextImgText {
+    min-width: 300px;
+    width: fit-content;
+    max-width: 55%;
+  }
+  
+  @media (max-width: 768px) {
+    .uxTextImg {
+      text-align: center;
+      flex-direction: column; /* Stacked Layout auf kleinen Bildschirmen */
+    }
+  
+    .uxTextImgText {
+      margin-top: 2rem; /* Abstand zwischen Bild und Text bei vertikalem Layout */
+    }
+  }
+  

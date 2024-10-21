@@ -1,0 +1,183 @@
+.uxCookieModal {
+    background-color: rgb(var(--color-bg));
+    z-index: 100000;
+    animation: fadein 500ms ease;
+    position: fixed;
+    visibility: visible;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    pointer-events: none;
+    left: 0;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(5px);
+    transition: visibility 0s, opacity 500ms ease;
+    @apply bg-dark bg-opacity-60;
+}
+
+.uxCookieModal.hidden {
+    visibility: hidden;
+    pointer-events: all;
+    opacity: 0;
+    transition: visibility 0s 500ms, opacity 500ms ease;
+}
+
+.uxCookieModalContent {
+    position: relative;
+    height: 80%;
+    width: 60%;
+    max-width: 800px;
+    min-width: 300px;
+    pointer-events: all;
+
+    background-color: rgb(var(--color-bg));
+    animation: fadeIn 500ms ease;
+    @apply rounded-md shadow-xl p-8 flex flex-col justify-between gap-8;
+}
+
+.uxCookieModalContent.hidden {
+    animation: fadeOut 500ms ease;
+}
+
+.uxCookieModalWrap {
+    @apply  flex flex-col justify-start gap-8 overflow-y-scroll -mr-2 pr-2;
+}
+
+.uxCookieModalButtons {
+    @apply flex flex-row justify-between font-semibold text-dark;
+}
+
+.uxCookieModalButtons > button {
+    padding: 0.5rem 2rem;
+    @apply transition-all duration-200 ease-in-out drop-shadow-lg rounded-md;
+}
+
+.uxCookieModalCookies {
+    @apply w-full px-4 py-6 border-2 border-solid border-fg my-2 rounded-md text-fg text-lg;
+}
+
+.uxCookieModalChev {
+    transition: all 250ms ease-in-out;
+}
+
+.uxCookieModalChev.active {
+    transform: rotate(180deg);
+}
+
+.functionContainer {
+    @apply flex flex-row justify-evenly w-1/5 align-middle items-center;
+}
+
+.contentContainer {
+    @apply flex flex-row justify-between items-center;
+}
+
+@media(max-width: 1000px) {
+    .uxCookieModalButtons {
+        @apply flex flex-col justify-between font-semibold text-dark gap-4;
+    } 
+
+    .contentContainer {
+        @apply items-start gap-4;
+    }
+
+    .functionContainer {
+        @apply flex flex-col gap-8;
+    }
+}
+
+/* MODAL FADE-IN ANIMATION */
+@keyframes fadein {
+    from {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  @keyframes fadeout {
+    from {
+      opacity: 1;
+      transform: scale(1);
+    }
+    to {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+  }
+
+.uxCookieModalTextLink {
+    @apply underline text-sm flex flex-row justify-start gap-8;
+}
+
+.cookieDetails {
+    max-height: 0;
+    max-width: 80%;
+    overflow: hidden;
+    transition: all 250ms ease-in-out;
+    @apply text-sm text-fg opacity-60 mt-0;
+}
+
+.cookieDetails.show {
+    @apply mt-4;
+    max-height: 1000px;
+    transition: all 250ms ease-in-out;
+}
+
+.functionContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    @apply w-1/5;
+}
+
+.toggle {
+    position: relative;
+    cursor: pointer;
+    width: 60px;
+    height: 34px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+.toggle input {
+    display: none;
+}
+
+.toggleContainer {
+    position: absolute;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 34px;
+    @apply bg-neutral;
+}
+
+.toggleContainer:before {
+    position: absolute;
+    content: "";
+    height: 26px; /* Höhe des Schiebeknopfes */
+    width: 26px;  /* Breite des Schiebeknopfes */
+    left: 4px; /* Positionierung des Schiebeknopfes */
+    top: 4px; /* Positionierung des Schiebeknopfes */
+    background-color: rgb(var(--color-light)); /* Hintergrundfarbe des Schiebeknopfes */
+    transition: .4s; /* Übergangseffekt */
+    border-radius: 50%; /* Abrundung des Schiebeknopfes */
+}
+
+/* Der Zustand, wenn der Schieber aktiv ist */
+input:checked + .toggleContainer {
+    background-color: #49c54f;
+}
+
+input:checked + .toggleContainer:before {
+    transform: translateX(26px); /* Schiebeknopf bewegt sich nach rechts */
+}

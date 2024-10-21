@@ -1,0 +1,224 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 
+ * create colorpalette 
+ * feature darkmode/lightmode
+ */
+@layer base {
+  :root {
+    --color-bg: 245 245 245;
+    --color-light: 245 245 245;
+    --color-dark: 29 29 29;
+    --color-fg: 29 29 29;
+
+    --color-primary: 231 91 59;
+    --color-primary2: 206 66 35;
+    --color-secondary: 216 180 256;
+    --color-secondary2: 192 132 252;
+    --color-neutral: 209 213 219;
+
+    --ending: '-dark';
+
+    overflow-x: hidden;
+  }
+  
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --color-fg: 245 245 245;
+      --color-bg: 29 29 29;
+
+      --ending: '-light';
+    }
+  }
+}
+
+:root:has(.no-doc-scroll) {
+  overflow:hidden;
+}
+
+/* 
+ * clean up window/body element
+ * scroll-behav. to smooth | backgroundcolor
+ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+
+}
+
+body {
+  margin: 0;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  background-color: rgb(var(--color-bg));
+}
+
+body.no-doc-scroll {
+  pointer-events: none;
+}
+
+section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 90vh;
+
+  width: 90%;
+  max-width: 1600px;
+  margin: auto;
+  margin-bottom: 12rem;
+}
+
+#header {
+  position: absolute;
+  min-height: 100vh;
+  height: fit-content;
+  top: 0;
+  left: 0;
+
+  overflow: hidden;
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+}
+
+#header p {
+  color: rgb(var(--color-light));
+}
+
+#header h1 {
+  color: rgb(var(--color-light));
+}
+
+#afterHeader {
+  margin-top: 100vh;
+}
+
+@media (max-width: 1079px) {
+  #afterHeader {
+    margin-top: calc(100vh + 6rem);
+  }
+}
+
+@media (max-width: 875px) {
+  #afterHeader {
+    margin-top: calc(100vh + 11rem);
+  }
+}
+
+@media (max-width: 680px) {
+  #afterHeader {
+    margin-top: calc(100vh + 15rem);
+  }
+}
+
+@media (max-width: 570px) {
+  #afterHeader {
+    margin-top: calc(100vh + 25rem);
+  }
+}
+
+@media (max-width: 505px) {
+  #afterHeader {
+    margin-top: calc(100vh + 30rem);
+  }
+}
+
+@media (max-width: 430px) {
+  #afterHeader {
+    margin-top: calc(100vh + 40rem);
+  }
+}
+
+#last {
+  margin-top: -3rem;
+  min-height: 0px;
+  height: fit-content;
+}
+
+/*
+ * set styles for fonts/headers/paragraphs
+ * font-family made up in layout.tsx
+ */
+h1,
+h2,
+h3,
+h4 {
+    margin: 0;
+    padding: 0;
+    cursor: default;
+    @apply text-fg font-semibold whitespace-normal;
+}
+
+h1 {
+  @apply text-5xl;
+ }
+
+ h2 {
+  @apply text-3xl;
+ }
+
+ h3 {
+  @apply text-2xl;
+ }
+
+ h4 {
+  @apply text-xl;
+ }
+
+ p {
+  cursor: default;
+  margin: 0;
+  font-size: 17px;
+  @apply text-fg leading-8;
+ }
+
+ a {
+  margin: 0
+ }
+
+.impress-div {
+  max-width: 600px;
+  width: 50%;
+  min-width: 280px;
+  @apply pt-24 pl-8 pr-8;
+}
+
+@media (max-width: 639px) {
+  .impress-div {
+    margin:auto;
+    width: 80%;
+    @apply pt-24;
+  }
+}
+
+/* Google reCAPTCHA styles */
+.grecaptcha-badge {
+  width: 70px !important;
+  overflow: hidden !important;
+  transition: all 0.3s ease !important;
+  left: 12px !important;
+  bottom: 96px !important;
+}
+.grecaptcha-badge:hover {
+  width: 256px !important;
+}
+
+
+/* Loading Animations */
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.rotation-icon {
+  animation: rotate 2s linear infinite; /* Hier wird die Animation definiert: 2 Sekunden Dauer, lineare Bewegung, unendliche Wiederholung */
+}
