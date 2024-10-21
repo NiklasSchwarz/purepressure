@@ -13,6 +13,8 @@ interface CompetencesProps {
     text_two: string;    
     headline_three: string;
     text_three: string;
+    children?: React.ReactNode; // Add this if children are needed
+
   }
   
   // Erstelle die Funktionale Komponente

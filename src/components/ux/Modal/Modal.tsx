@@ -7,6 +7,7 @@ interface ContentSectionProps {
   type: number;
   msg: string;
   show: boolean;
+  children?: React.ReactNode; // Add this if children are needed
 }
 
 // Erstelle die Funktionale Komponente

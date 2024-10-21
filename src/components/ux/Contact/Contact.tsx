@@ -7,6 +7,8 @@ import { FaComments } from 'react-icons/fa'
 interface ContentSectionProps {
   heading: string;
   text: string;
+  children?: React.ReactNode; // Add this if children are needed
+
 }
 
 // Erstelle die Funktionale Komponente

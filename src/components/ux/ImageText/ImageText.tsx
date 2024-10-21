@@ -10,6 +10,8 @@ interface ContentSectionProps {
   heading: string;
   text: string;
   images: string[];
+  children?: React.ReactNode; // Add this if children are needed
+
 }
 
 // Erstelle die Funktionale Komponente

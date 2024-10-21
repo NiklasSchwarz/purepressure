@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint . --ext .js,.jsx,.ts,.tsx"
+    "lint": "next lint"
   },
   "devDependencies": {
     "@types/formidable": "^3.4.5",
