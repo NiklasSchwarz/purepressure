@@ -17,7 +17,7 @@
     --color-primary2: 206 66 35;
     --color-secondary: 216 180 256;
     --color-secondary2: 192 132 252;
-    --color-neutral: 209 213 219;
+    --color-neutral: 75 85 90;
 
     --ending: '-dark';
 
@@ -28,6 +28,7 @@
     :root {
       --color-fg: 245 245 245;
       --color-bg: 29 29 29;
+      --color-neutral: 209 213 219;
 
       --ending: '-light';
     }
@@ -65,12 +66,10 @@ section {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 90vh;
-
   width: 90%;
   max-width: 1600px;
   margin: auto;
-  margin-bottom: 12rem;
+  @apply mb-[6rem];
 }
 
 #header {
@@ -134,12 +133,6 @@ section {
   }
 }
 
-#last {
-  margin-top: -3rem;
-  min-height: 0px;
-  height: fit-content;
-}
-
 /*
  * set styles for fonts/headers/paragraphs
  * font-family made up in layout.tsx
@@ -155,7 +148,7 @@ h4 {
 }
 
 h1 {
-  @apply text-5xl;
+  @apply text-5xl leading-snug;
  }
 
  h2 {
@@ -173,8 +166,7 @@ h1 {
  p {
   cursor: default;
   margin: 0;
-  font-size: 17px;
-  @apply text-fg leading-8;
+  @apply text-neutral text-base;
  }
 
  a {

@@ -1,0 +1,76 @@
+.competences_container {
+    width: 100%;
+    margin: 0 auto;
+    justify-content: space-between;
+
+    @apply flex flex-row justify-between gap-10 md:gap-16 2xl:gap-28;
+}
+
+.competences_heading {
+  @apply  w-1/3 flex-grow flex flex-col justify-between;
+}
+
+.competences_grid {
+  display: grid;
+  height: 100%;
+  max-width: 60%;
+  grid-template-columns: repeat(1, minmax(300px, 1fr));
+  @apply gap-16;
+}
+
+.competences_card {
+  @apply min-w-[270px] flex flex-row gap-12 items-center;
+}
+  
+
+.competences_card_text {
+  @apply flex flex-col gap-4 text-dark max-w-[80%] min-[380px]:max-w-[100%]; 
+}
+
+.competences_card_text > p {
+  @apply text-gray-500 font-light text-base;
+}
+    
+  
+    
+@media (max-width: 1180px) {
+  .competences_container {
+    @apply flex-col justify-start;
+  }
+
+  .competences_heading{
+    @apply w-full flex-row items-end ;
+  }
+
+  .competences_heading > h1 {
+    @apply w-2/3 min-h-[100px];
+  }
+
+  .competences_grid {
+    width: 100%;
+    max-width: 100%;
+    @apply gap-x-0 gap-y-16;
+  }
+}
+
+@media (max-width: 950px) {
+  .competences_heading {
+    @apply flex-col justify-start items-start;
+  }
+
+  .competences_heading > h1 {
+    @apply w-full;
+  }
+}
+  
+@media (max-width: 850px) {
+  .competences_card {
+    @apply flex-col justify-start items-start;
+  }
+}
+    
+@media (max-width: 700px) {
+  .competences_heading > h1{
+    @apply text-3xl;
+  }
+}

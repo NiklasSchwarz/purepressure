@@ -9,7 +9,7 @@ import ScrollBtn from '@/components/layout/ScrollButton/ScrollButton'
 import Footer from '@/components/layout/Footer/Footer'
 
 //fonts
-import { Inter,  Special_Elite } from 'next/font/google'
+import { Inter } from 'next/font/google'
 import CookieModal from '@/components/services/Cookie/CookieModal'
 const inter = Inter({ subsets: ['latin'] })
 

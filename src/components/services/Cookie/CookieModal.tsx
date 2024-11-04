@@ -101,7 +101,7 @@ const CookieModal: React.FC = () => {
 
   return (
     <>
-        <button className={`text-4xl bg-neutral text-dark rounded-full shadow-lg w-16 fixed bottom-4 left-4 h-16 hover:bg-primary duration-200 transition-all ease-in-out ${!hidden ? "pointer-events-none" : null}`} 
+        <button className={`text-4xl bg-gray-300 text-dark rounded-full shadow-lg w-16 fixed bottom-4 left-4 h-16 hover:bg-gray-400 duration-200 transition-all ease-in-out ${!hidden ? "pointer-events-none" : null}`} 
                 onClick={() => triggerHidden(!hidden)}>
             <FaCookieBite className='m-auto'/>
         </button>
@@ -176,8 +176,8 @@ const CookieModal: React.FC = () => {
                 </div>
             </div>
             <div className="uxCookieModalButtons">
-                <button onClick={()=>updateCookieSettings(0)} className='bg-neutral hover:bg-gray-400'>Speichern</button>
-                <button onClick={()=>updateCookieSettings(2)} className='bg-neutral hover:bg-gray-400'>Ablehnen</button>
+                <button onClick={()=>updateCookieSettings(0)} className='bg-gray-300 hover:bg-gray-400'>Speichern</button>
+                <button onClick={()=>updateCookieSettings(2)} className='bg-gray-300 hover:bg-gray-400'>Ablehnen</button>
                 <button onClick={()=>updateCookieSettings(1)} className='bg-green-300 hover:bg-green-400'>Alles akzeptieren</button>
             </div>
         </div>

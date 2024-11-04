@@ -1,0 +1,24 @@
+.CardGrid {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    gap: 2.5rem;
+}
+
+
+@media (max-width: 1080px) {
+    .CardGrid {
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+    }
+}
+
+@media (max-width: 1000px) {
+    .CardGrid {
+        margin: auto;
+        gap: 6rem;
+    }
+}

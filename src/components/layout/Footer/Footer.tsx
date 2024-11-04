@@ -9,7 +9,7 @@ import { FaXingSquare, FaFacebook, FaLinkedinIn } from 'react-icons/fa'
 
 export default function Footer() {
   return (
-    <footer  className='w-100 p-10 bg-fg bg-opacity-20 font-light text-fg break-words flex flex-col items-center sm:block'>
+    <footer  className='w-100 p-10 bg-bg font-light text-fg break-words flex flex-col items-center sm:block border-t-[1px] border-fg border-opacity-30'>
       <div className='grid grid-cols-1 sm:grid-cols-3 gap-4 justify-items-center m-5'>
         <img src="ATBS_logo_clean.png" alt="ATBS_LOGO" className='logo_clean pb-10'/>
         <div className='flex flex-col gap-2 w-5/6 max-w-xs text-center sm:text-left'>

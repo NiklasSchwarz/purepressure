@@ -4,6 +4,9 @@ import './Rondell.css'
 import { v4 as uuidv4 } from "uuid"; 
 import Card from "./Card"; 
 import dynamic from 'next/dynamic';
+import useResolution from '@/components/services/Functions/ResolutionCheck';
+import { useScroll, useTransform, motion } from 'framer-motion';
+import { useRef } from 'react';
 
 const Carousel = dynamic(() => import('./Carousel'), { ssr: false });
 
@@ -14,7 +17,7 @@ function Rondell() {
       content: (
         <Card imagen="/images/certificates/cert-9001.png" 
               title="DIN EN ISO 9001"
-              text="Anforderungen an ein Qualitätsmanagement System zur Sicherstellung von Kundenzufriedenheit und kontinuierlicher Qualität" 
+              text="Anforderungen an ein Qualitätsmanage&shy;ment System zur Sicherstellung von Kundenzufriedenheit und kontinuierlicher Qualität" 
          />
       )
     },
@@ -23,7 +26,7 @@ function Rondell() {
       content: (
         <Card imagen="/images/certificates/exc3.svg" 
               title="DIN EN ISO 3834-2" 
-              text="Qualitätsanforderungen für das Schemlzschweißen von metallischen Werkstoffen"
+              text="Qualitätsanforder&shy;ungen für das Schemlzschweißen von metallischen Werkstoffen"
         />
       )
     },
@@ -32,7 +35,7 @@ function Rondell() {
       content: (
         <Card imagen="/images/certificates/cert-15085.png" 
               title="EN 15085-2 Kl. CL1" 
-              text="Schweißen von Schienenfahrzeugen und Schienenfahrzeugteilen"
+              text="Schweißen von Schienenfahrzeugen und Schienenfahrzeug&shy;teilen"
          />
       )
     },
@@ -41,7 +44,7 @@ function Rondell() {
       content: (
         <Card imagen="/images/certificates/cert-ad2000.png" 
               title="AD 2000 HP0" 
-              text="Herstellungsberechtigt für Druckgeräte und Druckgeräteteile sowie Rohrleitungen und Rohrleitungsteile"
+              text="Herstellungsberech&shy;tigt für Druckgeräte und Druckgeräteteile sowie Rohrleitungen und Rohrleitungsteile"
         />
       )
     },
@@ -50,7 +53,7 @@ function Rondell() {
       content: (
         <Card imagen="/images/certificates/cert-ad2000.png" 
               title="DGRL 97/23/EG"
-              text="Umstempelungsberechtigt gemäß Druckgeräterichtline nach AD 2000" 
+              text="Umstempelungs&shy;berechtigt gemäß Druckgeräterichtline nach AD 2000" 
         />
       )
     },
@@ -59,7 +62,7 @@ function Rondell() {
       content: (
         <Card imagen="/images/certificates/cert10903.png" 
               title="EN 1090-3:2019 EXC3"
-              text="Schweißzulassung für Aluminiumtragwerken beanspruchter Bauteile oder Tragwerke" 
+              text="Schweißzulassung für Aluminiumtrag&shy;werken beanspruchter Bauteile oder Tragwerke" 
         />
       )
     },
@@ -73,21 +76,36 @@ function Rondell() {
       )
     }
   ];
+  const resolution = useResolution()
+  const ref1 = useRef<HTMLDivElement | null>(null)
+
+  const { scrollYProgress:scrollProgress } = useScroll({
+      target: ref1,
+      offset: (resolution == 0) ? ["0 1", "0.8 1"] : (
+                resolution == 1 ? ["0 1", "0.6 1"] : ["0 1", "0.5 1"] 
+              )
+  });
+
+  const transformedScroll1 = useTransform(scrollProgress, [0, 1], [0.75, 1]);
+
   return (
-    <div className="uxRondell flex flex-col w-full items-center justify-center 
-      lg:flex-row lg:justify-evenly ">
-        <div className="text-center lg:text-left w-4/5 lg:w-1/3 lg:my-auto lg:pr-5">
-            <h2 className='hyphens-auto break-words whitespace-normal mb-12 lg:mb-4'>Unsere Qualitäts- und Fertigungs&shy;zertifikate  </h2> <br/>
-            <p className='mb-32'>Unsere Produkte und Dienstleistungen unterliegen strengen Qualitätskontrollen und erfüllen sämtliche relevanten Zertifizierungsanforderungen. Durch unsere umfassenden Zertifizierungen garantieren wir nicht nur die Konformität mit internationalen Normen, sondern auch die kontinuierliche Verbesserung und Zuverlässigkeit unserer Prozesse. </p>
+      <motion.div className="w-full" ref={ref1} style={{scale:transformedScroll1, opacity:transformedScroll1}} >
+        <div className="uxRondell">
+            <div className="w-full xl:w-[55%]">
+              <h1 className='rondell_heading text-dark'>Unsere Qualitäts- und Fertigungs&shy;zertifikate.</h1>
+              <p className='rondell_text text-gray-500'>Unsere Produkte und Dienstleistungen unterliegen strengen Qualitätskontrollen und erfüllen sämtliche relevanten Zertifizierungs&shy;anforderungen. Durch unsere umfassenden Zertifizierungen garantieren wir nicht nur die Konformität mit internationalen Normen, sondern auch die kontinuierliche Verbesserung und Zuverlässigkeit unserer Prozesse. </p>
+            </div>
+            <div className="rondell_container">
+              <Carousel
+                cards={cards}
+                height="550px"
+                width="90%"
+                offset={2}
+                showArrows={false}
+            />
+            </div>
         </div>
-        <Carousel
-        cards={cards}
-        height="500px"
-        width="30%"
-        offset={2}
-        showArrows={false}
-      />
-    </div>
+      </motion.div>
   );
 }
 

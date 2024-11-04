@@ -1,0 +1,24 @@
+.logo_stripe_container {
+    @apply px-4 py-4 rounded-[40px] overflow-hidden max-w-[1600px] w-full ;
+}
+.logo_stripe {
+    animation: scroll 10s linear infinite;
+    will-change: transform;
+    width: fit-content;
+    @apply flex flex-row items-center gap-32;
+}
+
+.logo_stripe_img {
+  height: 50px;
+  width: auto;
+    flex-shrink: 0; /* Prevent shrinking */
+}
+
+@keyframes scroll {
+    0% {
+      transform: translateX(0); /* Start just out of view on the right */
+    }
+    100% {
+      transform: translateX(-46.55%); /* Move to the left */
+    }
+  }
