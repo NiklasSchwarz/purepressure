@@ -57,15 +57,15 @@ export default function Navbar() {
                     {
                         links.map((item, index) => (
                             <Link key={item.id} href={item.href}>
-                                <div className={`${activeIdx != 0 ? "text-fg" : "text-light"}`} onClick={() => {setNav(false)}}>
+                                <div className={`${activeIdx != 0 ? "text-fg" : "text-fg"}`} onClick={() => {setNav(false)}}>
                                     <NavigationLink text={item.text} active={activeIdx === index} /> 
                                 </div> 
                             </Link>
                         ))}
                 </ul>
             </nav>
-            <button className={`layoutNavigationButton border-2 ${activeIdx != 0 ? "border-fg" : "border-light"}`} aria-expanded={nav? "true" : "false"} onClick={() => setNav(!nav)}>
-                <svg stroke={`${activeIdx != 0 ? "rgba(var(--color-fg))" : "rgba(var(--color-light))"}`} fill="none" className="hamburger" viewBox="-10 -10 120 120" width="40">
+            <button className={`layoutNavigationButton border-2 ${activeIdx != 0 ? "border-fg" : "border-fg"}`} aria-expanded={nav? "true" : "false"} onClick={() => setNav(!nav)}>
+                <svg stroke={`${activeIdx != 0 ? "rgba(var(--color-fg))" : "rgba(var(--color-fg))"}`} fill="none" className="hamburger" viewBox="-10 -10 120 120" width="40">
                 <path className="line" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" d="m 20 40 h 60 a 1 1 0 0 1 0 20 h -60 a 1 1 0 0 1 0 -40 h 30 v 70">
                 </path>
                 </svg>

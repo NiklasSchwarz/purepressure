@@ -3,8 +3,7 @@ import React from 'react'
 const NavigationLink = ({text, active}) => {
   return (
     <li className={`layoutNavigationItem 
-                    ${active ? "layoutNavigationItemActive bg-fg bg-opacity-10 text-xl" : ""}
-                    ${(text == 'Übersicht' && active) ? "bg-light bg-opacity-20" : ""} `}>
+                    ${active ? "layoutNavigationItemActive bg-light bg-opacity-40 text-xl rounded-full shadow-lg" : ""}`}>
         {text}
     </li>
   )

@@ -69,20 +69,8 @@ section {
   width: 90%;
   max-width: 1600px;
   margin: auto;
+  z-index: -1;
   @apply mb-[6rem];
-}
-
-#header {
-  position: absolute;
-  min-height: 100vh;
-  height: fit-content;
-  top: 0;
-  left: 0;
-
-  overflow: hidden;
-  width: 100%;
-  max-width: 100%;
-  margin: 0;
 }
 
 #header p {

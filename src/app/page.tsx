@@ -12,13 +12,13 @@ import Jobs from '@/components/ux/Jobs/Jobs'
 export default function Home() {
   return ( 
     <>
-    <section>
+    <section className='overflow-visible'>
       <Head 
-        heading='ATBS Braunschweig GmbH & Co.KG '
-        imageSrc='/images/maschines/laser_2.jpg' 
+        heading='Ihre Ideen, &shy; perfektioniert in Metall.'
+        imageSrc='/images/actions/lasern_3.jpg' 
         imageAlt='HeaderImage'
-        text='Die umfassende Lösung gegen lange Durchlaufzeiten und hohe Beschaffungskosten für Ihre Metallteile ist hier. ATBS Braunschweig ist Ihr zuverlässiger Partner für die Fertigung metallischer Komponenten, der lange Lieferzeiten eliminiert und Projektkosten senkt. Mit einem spezialisierten Maschinenpark gewährleisten wir eine effiziente Bearbeitung Ihrer Bauteile auf kurzen Wegen von maximal 150 Metern.'
-        subtitle='Die Lösung gegen lange Durchlaufzeiten und hohe Beschaffungskosten für Ihre Metallteile ist hier. ATBS Braunschweig ist Ihr zuverlässiger Partner für die Fertigung metallischer Komponenten. Wir eliminieren lange Lieferzeiten und senken Ihre Projektkosten. Mit unserem spezialisierten Maschinenpark sorgen wir für eine effiziente Bearbeitung Ihrer Bauteile. Dabei halten wir die Wege kurz – maximal 150 Meter.'>
+        text='Mit uns als ihren Partner haben Sie keine langen Durchlaufzeiten oder hohe Beschaffungskosten.'
+        subtitle='Kennen Sie lange Durchlaufzeiten oder hohe Beschaffungskosten? Die ATBS nicht.'>
       </Head>
     </section>
     <section id="services">

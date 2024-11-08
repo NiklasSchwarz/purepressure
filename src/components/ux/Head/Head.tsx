@@ -3,7 +3,7 @@ import './Head.css'
 import React from 'react';
 import Image from 'next/image';
 
-import { FaRegCheckSquare } from 'react-icons/fa';
+import { FaChevronCircleRight } from 'react-icons/fa';
 
 // Definiere die Props für die Komponente
 interface ContentSectionProps {
@@ -18,28 +18,18 @@ interface ContentSectionProps {
 // Erstelle die Funktionale Komponente
 const Head: React.FC<ContentSectionProps> = ({ imageSrc, imageAlt, heading, text , subtitle}) => {
   return (
-    <div className="uxHead">
-      <div className='uxHeadImageContainer'>
-        <Image className='uxHeadImage' src={imageSrc} alt={imageAlt} width={400} height={400} />
-      </div>
-      <div className="uxHeadText">
-        <h1 className='whitespace-normal uppercase'>{heading}</h1>
-        <p className='text-xl font-light'>{subtitle}</p>
-        <div className='flex flex-row justify-center w-full flex-wrap gap-y-8'>
-          <div className='flex flex-row items-center px-6 py-3 border-solid rounded-md bg-light bg-opacity-50 pointer-events-none mx-4 text-light font-semibold text-lg'>
-            <FaRegCheckSquare className='mr-4 w-7 h-7 text-green-700' /> Aluminium
-          </div>
-          <div className='flex flex-row items-center px-6 py-3 border-solid rounded-md bg-light bg-opacity-50 pointer-events-none mx-4 text-gray-600 font-semibold text-lg'>
-            <FaRegCheckSquare className='mr-4 w-7 h-7 text-green-700' /> Stahl
-          </div>
-          <div className='flex flex-row items-center px-6 py-3 border-solid rounded-md bg-light bg-opacity-50 pointer-events-none mx-4 text-amber-300 font-semibold text-lg'>
-            <FaRegCheckSquare className='mr-4 w-7 h-7 text-green-700' /> Messing
-          </div>
-          <div className='flex flex-row items-center px-6 py-3 border-solid rounded-md bg-light bg-opacity-50 pointer-events-none mx-4 text-slate-300 font-semibold text-lg'>
-            <FaRegCheckSquare className='mr-4 w-7 h-7 text-green-700'  /> Edelstahl
-          </div>
+    <div className="uxHead pl-16">
+      <div className="uxHeadContent">
+        <div className="uxHeadText">
+          <h1 className='whitespace-normal text-7xl leading-tight'>{heading}</h1>
+          <p className='text-xl font-light'>Kennen Sie <span className='text-red-400'>lange Durchlaufzeiten</span> oder <span className='text-red-400'>hohe Beschaffungskosten</span>? <b className='font-medium'>Die ATBS nicht.</b></p>
+          <a className="mt-4 flex flex-row overflow-hidden gap-4 items-center rounded-full bg-red-300 hover:bg-red-400 relative group transition-all duration-500 ease-in-out px-12 py-4 shadow-xl w-[200px] cursor-pointer" href=""><FaChevronCircleRight className='absolute right-[87%] transition-all duration-500 group-hover:right-[5%] group-hover:rotate-180 cursor-pointer'/><p className='transition-all duration-500 absolute -right-[20%] group-hover:-right-[8%] w-full cursor-pointer text-dark'>Angebot anfordern</p></a>
+        </div>
+        <div className="uxHeadInformation relative w-[130%] bg-bg rounded-tr-[40px] pt-[80px] pr-[40px] pb-[40px]">
+            <h2 className='font-normal leading-tight'>Hier steht etwas, weshlab wir die besten sind und ein alleinstellungsmerkmla ojnqeprig qepirhg pq rqieürbqeriüj vqepirj vqeirpj vqerüijv qerüij </h2>
         </div>
       </div>
+      <Image className='uxHeadImage' src={imageSrc} alt={imageAlt} width={400} height={400} />
     </div>
   );
 };
