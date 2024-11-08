@@ -17,7 +17,7 @@
     flex-direction: column;
     justify-content: center;
     gap: 1rem;
-    @apply break-words relative;
+    @apply relative;
   }
 
   .uxHeadText::after {
@@ -133,5 +133,11 @@
   }
   .uxHeadInformation {
     display: none;
+  }
+}
+
+@media (max-width: 500px) {
+  .uxHeadText {
+    @apply pr-[20px];
   }
 }

@@ -14,7 +14,7 @@ export default function Home() {
     <>
     <section className='overflow-visible'>
       <Head 
-        heading='Ihre Ideen, &shy; perfektioniert in Metall.'
+        heading='Ihre Ideen, perfektioniert in Metall.'
         imageSrc='/images/actions/lasern_3.jpg' 
         imageAlt='HeaderImage'
         text='Mit uns als ihren Partner haben Sie keine langen Durchlaufzeiten oder hohe Beschaffungskosten.'
