@@ -24,9 +24,9 @@ const Contact: React.FC<ContentSectionProps> = ({ button_text, image }) => {
             width={1000}
             height={600}
             loading="lazy"
-            className="jobs_image"
+            className="jobs_image -scale-x-100"
         /> 
-        <div className='jobs_txt'>
+        <div className='jobs_txt min-[650px]:block hidden'>
           <div className="pt-4 pl-4">
           <p>uiwqbt iqbt qjüj qüjr güiuq rgj qü rg rgnqüwn onqog qowg üoiqnwgo nqwogn r iqgnrgü qi rnogrni qoinrgoq inrgn qowringo qnrgni qoring oqinrgoinq oignoeqin groiqenrgin qorgn oqenrg oqeorg ineqori norir oqin on  noi nqeng roiqenrüng qien nqorig nqe
              uiwqbt iqbt qjüj qüjr güiuq rgj qü rg rgnqüwn onqog qowg üoiqnwgo nqwogn uiwqbt iqbt qjüj qüjr güiuq rgj qü rg rgnqüwn onqog qowg üoiqnwgo nqwogn uiwqbt iqbt qjüj qüjr güiuq rgj qü rg rgnqüwn onqog qowg üoiqnwgo nqwogn </p>

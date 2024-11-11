@@ -137,7 +137,15 @@
 }
 
 @media (max-width: 500px) {
+  .uxHead {
+    overflow: visible;
+    @apply -mr-8 w-[105%];
+  }
   .uxHeadText {
-    @apply pr-[20px];
+    @apply pr-[20px] pl-2;
+  }
+
+  .uxHeadImage {
+    @apply rounded-tr-none rounded-br-none;
   }
 }

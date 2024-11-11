@@ -1,12 +1,9 @@
-//Images
-import Grid from '@/components/ux/Grid/Grid'
 import Competences from '@/components/ux/Competences/Competences'
 import Rondell from '@/components/ux/Rondell/Rondell'
 import Head from '@/components/ux/Head/Head'
 import Contact from '@/components/ux/Contact/Contact'
 import SliderTxt from '@/components/ux/Slider/Slider'
 import CardGrid from '@/components/ux/CardGrid/CardGrid'
-import LogoStripe from '@/components/ux/LogoStripe/LogoStripe'
 import Jobs from '@/components/ux/Jobs/Jobs'
 
 export default function Home() {

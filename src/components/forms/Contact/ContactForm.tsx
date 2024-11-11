@@ -119,49 +119,42 @@ const ContactForm = () => {
   };
 
   return (
-    <div className='pb-8 flex flex-col justify-start items-center gap-10 bg-bg pt-8 mt-16 w-full mb-16 text-fg relative'>
-      <h2 className="text-2xl sm:text-4xl mb-14">Kontakt</h2>
-      <div className='w-10/12 flex flex-row justify-evenly flex-wrap'>
-        <div className='flex flex-col gap-2 text-center sm:text-left pt-8 w-1/2 pr-16 textContact'>
-        <h4 className='whitespace-normal'>Willkommen auf unserer Kontaktseite! </h4>
-        <p><br/> Als erfahrener Blechbearbeiter legen wir großen Wert auf Qualität und Kundenzufriedenheit. Unser Ziel ist es, Ihre Anforderungen präzise und termingerecht umzusetzen.
-           <br/>Haben Sie Fragen zu unseren Dienstleistungen oder möchten Sie ein individuelles Angebot einholen? Zögern Sie nicht, uns zu kontaktieren. Füllen Sie einfach das Formular aus oder kontaktieren Sie uns direkt über <b>vertrieb@atbs.de</b>, und wir melden uns schnellstmöglich bei Ihnen.
-           <br/>Wir freuen uns darauf, Ihnen weiterhelfen zu können! <br/><br/>
-        </p>
-        <p className='locations mt-8 text-lg text-center font-bold'>Unsere Standorte</p>
-        <div className='locations flex flex-row justify-evenly mt-8'>
-          <div>
-              <p className='text-sm font-bold mb-4'>Braunschweig</p>
-              <div className='flex-row flex items-center gap-4 text-center justify-center sm:justify-normal  sm:text-left'>
+    <div className='flex flex-col justify-start items-center gap-10 w-full text-fg relative'>
+      <div className='flex flex-row justify-between w-full p-2 sm:p-8 flex-wrap min-[1208px]:gap-8'>
+        <div className='locations flex flex-col justify-between max-[1208px]:w-full w-[30%]'>
+          <h1 className='min-[1500px]:text-6xl text-5xl mb-12'>So <span className='text-blue-300'>kontaktierst</span> du die ATBS.</h1>
+          <div className='flex flex-col w-full max-[700px]:hidden max-[1208px]:flex-row max-[1208px]:justify-between max-[1208px]:px-8'>
+            <div className='mb-8 lg:mb-16'>
+                <p className='text-xl xl:text-2xl font-bold mb-4'>Braunschweig</p>
+                <div className='flex-row flex items-center gap-4 justify-normal  text-left'>
+                  <FaPhone className='text-fg'/> 
+                  <a href='callto:05307204120' className='text-xl xl:text-2xl'><p className='text-xl xl:text-2xl'>+49(0)5307 / 204120 </p>  </a>    
+                </div>
+                <div className='flex-row flex items-center gap-4 justify-normal'>
+                  <FaHome className='text-fg'/>         
+                  <p className='text-xl xl:text-2xl text-justify'>  
+                    Industriestraße 7<br />
+                    38110 Braunschweig<br /> <br />
+                  </p>  
+                </div>
+            </div>
+            <div>
+              <p className='text-xl xl:text-2xl font-bold  mb-4'>Lengede</p>
+              <div className='flex-row flex items-center gap-4 justify-normal'>
                 <FaPhone className='text-fg'/> 
-                <a href='callto:05307204120' className='text-sm'><p className='text-sm'>+49(0)5307 / 204120 </p>  </a>    
+                <a href='callto:05344261236' className='text-xl xl:text-2xl'><p className='text-xl xl:text-2xl'>+49(0)5344 / 261-236</p>   </a>    
               </div>
-              <div className='flex-row flex items-center gap-4 justify-center sm:justify-normal'>
+              <div className='flex-row flex items-center gap-4 justify-normal'>  
                 <FaHome className='text-fg'/>         
-                <p className='text-sm text-justify'>  
-                  Industriestraße 7<br />
-                  38110 Braunschweig<br /> <br />
+                <p className='text-xl xl:text-2xl text-justify'>  
+                  Lise-Meitner-Straße 7B<br />
+                  38268 Lengede<br /> <br />
                 </p>  
               </div>
-          </div>
-          <div>
-            <p className='text-sm font-bold  mb-4'>Lengede</p>
-            <div className='flex-row flex items-center gap-4 justify-center sm:justify-normal'>
-              <FaPhone className='text-fg'/> 
-              <a href='callto:05344261236' className='text-sm'><p className='text-sm'>+49(0)5344 / 261-236</p>   </a>    
             </div>
-            <div className='flex-row flex items-center gap-4 justify-center sm:justify-normal'>  
-              <FaHome className='text-fg'/>         
-              <p className='text-sm text-justify'>  
-                Lise-Meitner-Straße 7B<br />
-                38268 Lengede<br /> <br />
-              </p>  
-            </div>
-          </div>
           </div>
         </div>
-        <form className='max-w-3xl flex flex-col justify-start gap-10 rounded-md shadow-fg shadow-md px-8 py-8 h-fit' onSubmit={handleSubmit}>
-          <h4>Nachricht senden:</h4>
+        <form className='flex flex-col justify-start gap-6 rounded-[40px] bg-slate-200 p-8 lg:p-16 h-fit max-[1208px]:w-full w-2/3' onSubmit={handleSubmit}>
           <div className="formContainer">              
             <label className='formLabel' htmlFor="name">Vorname:</label>
             <input className={`formInput border-b-2 border-fg border-opacity-10 
@@ -199,7 +192,7 @@ const ContactForm = () => {
           </div>
           <ReCAPTCHA ref={recaptchaRef} size='invisible' sitekey={client_sitekey!} onChange={setCaptcha}/>
           <button className={`px-4 py-2 rounded-md shadow-md bg-opacity-30 hover:bg-opacity-50 ease-in-out transition-all duration-300 ${validForm ? 'pointer-events-auto cursor-pointer bg-green-300' : 'pointer-events-none bg-neutral'}`} type="submit">
-            {!loading ? (<p className='cursor-pointer'>Senden</p>) : (<Loading type={'text'}/>)}
+            {!loading ? (<p className='cursor-pointer text-dark'>Senden</p>) : (<Loading type={'text'}/>)}
           </button>
         </form>
       </div>

@@ -3,7 +3,7 @@
     margin: 16px 0;
     cursor: pointer;
     transition: all 250ms ease-in-out;
-    @apply bg-fg bg-opacity-5;
+    @apply bg-fg bg-opacity-5 rounded-3xl shadow-md;
 }
   
 .job:hover {
@@ -25,11 +25,10 @@
 
 .CarrerButtonBtn {
   transition: all 500ms ease-in-out;
-  @apply mt-6 py-4 px-6 rounded-md bg-primary font-semibold text-lg shadow-lg w-fit text-light;
+  @apply mt-6 py-4 px-6 rounded-xl bg-primary font-semibold text-lg shadow-lg w-fit text-light;
 }
 
 .CarrerButtonBtn:hover {
-  transform: translateY(-2px);
   @apply bg-primary2 shadow-xl;
 }
 
@@ -212,13 +211,13 @@
 }
 
 /* Google reCAPTCHA styles */
-.grecaptcha-badge {
+.apply_form .grecaptcha-badge {
   width: 256px !important;
   overflow: visible !important;
   transition: all 0.3s ease !important;
   left: calc(100% - 70px) !important;
   top: 12px !important;
 }
-.grecaptcha-badge:hover {
+.apply_form .grecaptcha-badge:hover {
   transform: translateX(-186px) !important;
 }

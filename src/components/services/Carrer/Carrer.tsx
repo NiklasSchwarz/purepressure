@@ -1,6 +1,7 @@
 "use client"
 
 import './Carrer.css'
+import '@/components/ux/Jobs/Jobs.css'
 import { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { Job, JobsData } from './CarrerItem';
 
@@ -9,6 +10,7 @@ import Image from 'next/image'
 import Loading from '@/app/loading';
 import ReCAPTCHA from 'react-google-recaptcha';
 import Modal from '@/components/ux/Modal/Modal';
+import { FaLocationArrow } from 'react-icons/fa';
 
 // client site input validation
 const nameRegex = /^[A-Za-zÀ-ÖØ-ÿ\s'-.]{2,}$/;
@@ -229,20 +231,51 @@ const Jobs: React.FC = () => {
           {loading === -1 &&  (
             <h3 className='mt-10 m-auto text-primary font-semibold'>Aktuell sind keine Stellenangebote online!</h3>
           )}
-          <p className='text-center'>
-              Falls Sie kein passendes Stellenangebot gefunden haben, nehmen wir gerne Initiativbewerbungen entgegen.
-              Sollten wir Ihr Interesse geweckt haben, so richten Sie bitte Ihre aussagekräftige Bewerbung an folgende Adresse oder nutzen Sie unser Online-Bewerbungsverfahren.
-            </p>
-          <div className='flex flex-row justify-around gap-10 items-center flex-wrap w-full mt-10'>
-            <p className='text-center'>
-              <b>ATBS Braunschweig </b><br />
-              Personalwesen<br />
-              Industriestraße 7<br />
-              38110 Braunschweig
-            </p>
-            <div className='flex flex-col justify-center gap-2'>
-              <h3>Jetzt direkt bewerben!</h3>
-              <button className='CarrerButtonBtn m-auto' onClick={togglePopup}>Bewerbung starten</button>
+          <div className="jobs">
+            <div className='jobs_heading'>
+              <h1 className=' mb-8 sm:mb-16 xl:mb-0'>Du hast <span className='font-semibold text-blue-400'>deinen</span> neuen Job gefunden?</h1>  
+              <div className='lg:block hidden'>
+                <p>Falls Sie kein passendes Stellenangebot gefunden haben, nehmen wir gerne Initiativbewerbungen entgegen.
+                  Sollten wir Ihr Interesse geweckt haben, so richten Sie bitte Ihre aussagekräftige Bewerbung an folgende Adresse oder nutzen Sie unser Online-Bewerbungsverfahren. <br/> <br/>
+                </p>
+                  <span className='flex flex-row gap-10 items-center'>
+                    <FaLocationArrow className='text-6xl text-blue-300'/>
+                    <p>
+                      <b>ATBS Braunschweig </b><br />
+                      Personalwesen<br />
+                      Industriestraße 7<br />
+                      38110 Braunschweig
+                    </p>
+                  </span>
+              </div>
+            </div>
+            <div className="relative w-full lg:w-[55%] rounded-[40px] h-100% bg-black">
+              <Image src={'/images/interview.jpg'}
+                  alt="Image Card"
+                  width={1000}
+                  height={600}
+                  loading="lazy"
+                  className="jobs_image"
+              /> 
+              <div className='jobs_txt'>
+                <div className="sm:p-8">
+                  <button className='CarrerButtonBtn' onClick={togglePopup}>Online Bewerbung</button>
+                </div>
+              </div>
+            </div>
+            <div className='lg:hidden block mt-8'>
+              <p>Falls Sie kein passendes Stellenangebot gefunden haben, nehmen wir gerne Initiativbewerbungen entgegen.
+                 Sollten wir Ihr Interesse geweckt haben, so richten Sie bitte Ihre aussagekräftige Bewerbung an folgende Adresse oder nutzen Sie unser Online-Bewerbungsverfahren. <br/> <br/> 
+              </p>
+              <span className='flex flex-row gap-10 items-center'>
+                <FaLocationArrow className='text-6xl text-blue-300'/>
+                <p>
+                  <b>ATBS Braunschweig </b><br />
+                  Personalwesen<br />
+                  Industriestraße 7<br />
+                  38110 Braunschweig
+                </p>
+              </span>
             </div>
           </div>
           <div className={`Overlay ${showPopup ? '' : 'hidden'}`} onClick={togglePopup}>
@@ -250,7 +283,7 @@ const Jobs: React.FC = () => {
             <div className='mt-44 sm:mt-0 w-fit mx-auto'>
               <h2 className='text-fg my-8 mx-auto'>Online Bewerbung</h2>
             </div>
-            <div className='flex flex-row flex-wrap justify-between w-full'>
+            <div className='flex flex-row flex-wrap justify-between w-full apply_form'>
               <form className='w-full m-0' onSubmit={handleSubmit}>
               <div className='flex flex-col col-span-2 mb-5 gap-0 w-full md:w-1/2 overflow-hidden'>
                   <div className='form-parent py-2 text-fg flex flex-col sm:flex-row w-full justify-between'>

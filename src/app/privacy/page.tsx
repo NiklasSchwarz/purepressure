@@ -2,8 +2,8 @@ import { FaUserShield } from "react-icons/fa"
 
 export default function Privacy() {
     return (
-      <main>
-        <div className="privacy-bg flex flex-col items-center justify-between p-8">
+      <section>
+        <div className="privacy-bg flex flex-col items-center justify-between p-8 w-full">
           <div className="flex flex-row justify-around items-center">
               <FaUserShield className="text-7xl hidden sm:block mr-11 text-fg" /> <h2 className="text-2xl sm:text-3xl">Datenschutzerklärung</h2>
           </div> 
@@ -100,6 +100,6 @@ export default function Privacy() {
       
           </p>
         </div>
-     </main>
+     </section>
     )
   }

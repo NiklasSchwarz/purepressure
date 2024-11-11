@@ -5,6 +5,18 @@
     text-align: right;
     flex-wrap: wrap;
     align-items: flex-start;
+    width: 100%;
+    @apply text-dark;
+}
+
+
+.formInput {
+    width: 100%;
+    @apply bg-fg bg-opacity-5 h-8 shadow-md rounded-sm px-4 py-2;
+}
+
+.formText {
+    @apply h-32;
 }
 
 @media (max-width: 1270px) {
@@ -32,27 +44,11 @@
         text-align: center;
     }
 
-    .locations {
-        display: none;
-    }
-
     .formContainer {
         flex-direction: row;
         width: 100%;
         padding: 0;
     }
-
-    br {
-        display: none;
-    }
-
-}
-
-@media (max-width: 614px) {
-    form {
-        width: 100%;
-    }
-    
 }
 
 .formLabel {
@@ -61,13 +57,4 @@
     margin: 0;
     padding: 0;
     text-align: left;
-}
-
-.formInput {
-    width: 20rem;
-    @apply bg-fg bg-opacity-5 h-8 shadow-md rounded-sm px-4 py-2;
-}
-
-.formText {
-    @apply h-32;
 }
