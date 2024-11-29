@@ -15,7 +15,7 @@ const Contact: React.FC<ContentSectionProps> = ({ button_text, image }) => {
   return (
     <div className="jobs">
       <div className='jobs_heading'>
-        <h1>Die ATBS als <span className='font-semibold text-blue-400'>dein</span> neuer Arbeitgeber.</h1>  
+        <h1>Die ATBS als <br className='hidden xl:block'/><span className='font-semibold text-blue-400'>ihr</span> neuer Arbeitgeber.</h1>  
         <a href='/carrer' className='m-4 flex flex-row gap-2 items-center w-fit hover:text-primary transition-colors bottom-0 text-fg'><FaAngleDoubleRight className='text-blue-300 text-xl'/>{button_text}</a>
       </div>
       <div className="relative w-full lg:w-2/3 rounded-[40px] h-100% bg-black">
@@ -28,8 +28,9 @@ const Contact: React.FC<ContentSectionProps> = ({ button_text, image }) => {
         /> 
         <div className='jobs_txt min-[650px]:block hidden'>
           <div className="pt-4 pl-4">
-          <p>uiwqbt iqbt qjüj qüjr güiuq rgj qü rg rgnqüwn onqog qowg üoiqnwgo nqwogn r iqgnrgü qi rnogrni qoinrgoq inrgn qowringo qnrgni qoring oqinrgoinq oignoeqin groiqenrgin qorgn oqenrg oqeorg ineqori norir oqin on  noi nqeng roiqenrüng qien nqorig nqe
-             uiwqbt iqbt qjüj qüjr güiuq rgj qü rg rgnqüwn onqog qowg üoiqnwgo nqwogn uiwqbt iqbt qjüj qüjr güiuq rgj qü rg rgnqüwn onqog qowg üoiqnwgo nqwogn uiwqbt iqbt qjüj qüjr güiuq rgj qü rg rgnqüwn onqog qowg üoiqnwgo nqwogn </p>
+          <p>ATBS Abkanttechnik Braunschweig bietet Ihnen eine Vielzahl an Einstiegsmöglichkeiten und eine Fülle von beruflichen Profilen, ob Maschienenbediener, Schweißer oder als Aufsichtsperson. Wählen Sie die Vakanz nach Ihren Vorlieben und sehen Sie, welche Stellen wir Ihnen bieten.
+            Dabei legen wir besonders auf die Arbeitsathmosphäre wert und stärken diese regelmäißg durch Team-Events oder gemeinsame Essen. Um auch ihre persönlichen Ziele zu erfüllen, helfen wir ihnen gerne mit verschiedensten Weiterbildungsmöglichkeiten.
+          </p>
           </div>
         </div>
       </div>

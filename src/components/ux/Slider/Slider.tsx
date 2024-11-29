@@ -57,25 +57,25 @@ const SliderTxt: React.FC<ContentSectionProps> = ({ images }) => {
   });
   const { scrollYProgress:scrollProgress3 } = useScroll({
     target: ref1,
-    offset: (resolution == 0) ? ["0.8 1", "2.5 1"] : (
+    offset: (resolution == 0) ? ["0.8 1", "2.3 1"] : (
               resolution == 1 ? ["0.8 1", "3 1"] : ["0.8 1", "3.8 1"] 
             )
   });
   const { scrollYProgress:scrollProgress4 } = useScroll({
     target: ref1,
-    offset: (resolution == 0) ? ["0.8 1", "3 1"] : (
+    offset: (resolution == 0) ? ["0.8 1", "2.7 1"] : (
               resolution == 1 ? ["0.8 1", "3.5 1"] : ["0.8 1", "4.8 1"] 
             )
   });
   const { scrollYProgress:scrollProgress5 } = useScroll({
     target: ref1,
-    offset: (resolution == 0) ? ["0.8 1", "3.5 1"] : (
+    offset: (resolution == 0) ? ["0.8 1", "3 1"] : (
               resolution == 1 ? ["0.8 1", "4 1"] : ["0.8 1", "5.8 1"] 
             )
   });
   const { scrollYProgress:scrollProgress6 } = useScroll({
     target: ref1,
-    offset: (resolution == 0) ? ["0.8 1", "4 1"] : (
+    offset: (resolution == 0) ? ["0.8 1", "3.3 1"] : (
               resolution == 1 ? ["0.8 1", "4.5 1"] : ["0.8 1", "6.8 1"] 
             )
   });

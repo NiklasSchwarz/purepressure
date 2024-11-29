@@ -233,7 +233,7 @@ const Jobs: React.FC = () => {
           )}
           <div className="jobs">
             <div className='jobs_heading'>
-              <h1 className=' mb-8 sm:mb-16 xl:mb-0'>Du hast <span className='font-semibold text-blue-400'>deinen</span> neuen Job gefunden?</h1>  
+              <h1 className=' mb-8 sm:mb-16 xl:mb-0'>Sie haben <span className='font-semibold text-blue-400'>ihren</span> neuen Job gefunden?</h1>  
               <div className='lg:block hidden'>
                 <p>Falls Sie kein passendes Stellenangebot gefunden haben, nehmen wir gerne Initiativbewerbungen entgegen.
                   Sollten wir Ihr Interesse geweckt haben, so richten Sie bitte Ihre aussagekräftige Bewerbung an folgende Adresse oder nutzen Sie unser Online-Bewerbungsverfahren. <br/> <br/>

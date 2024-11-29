@@ -1,7 +1,0 @@
-.servicesContainer {
-    @apply  pb-8 flex flex-col justify-start items-center pt-8;
-}
-
-.servicesContent {
-    @apply flex flex-col gap-32 mt-32 w-full justify-center align-middle items-center;
-}

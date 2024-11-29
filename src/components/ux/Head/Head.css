@@ -5,10 +5,9 @@
 
   .uxHeadImage {
     height: calc(100% + 100px);
-    width: 40%;
     object-fit: cover;
     object-position: center;
-    @apply rounded-[40px] rounded-bl-none -z-20 absolute flex-grow -right-[20px] -top-[100px];
+    @apply rounded-[40px] rounded-bl-none -z-20 absolute flex-grow -right-[20px] -top-[100px] w-[40%] xl:w-[45%];
   }
 
   .uxHeadText {
@@ -23,7 +22,7 @@
   .uxHeadText::after {
     position: absolute;
     bottom: 0;
-    right: -74px;
+    right: -72px;
     height: 80px;
     width: 80px;
     border-bottom-left-radius: 50%;
@@ -59,10 +58,10 @@
 }
 
 .uxHeadContent {
-  @apply w-[60%] overflow-visible gap-0 flex flex-col justify-between mt-[10%];
+  @apply w-[60%] xl:w-[55%] overflow-visible gap-0 flex flex-col justify-between mt-[12%];
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1280px) {
   .uxHead {
     @apply pl-8;
   }

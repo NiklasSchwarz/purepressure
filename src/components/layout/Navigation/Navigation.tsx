@@ -21,7 +21,7 @@ export default function Navbar() {
     // TODO: dynamisch zur Weberweiterung 
     const links = [
         { id:"1", text: "Übersicht", href: "/"},
-        { id:"2", text: "Leistungen", href: "/services"},
+        { id:"2", text: "Unternehmen", href: "/company"},
         { id:"3", text: "Kontakt", href: "/contact"},
         { id:"4", text: "Karriere", href: "/carrer"}
     ]

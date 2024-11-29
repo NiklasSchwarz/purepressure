@@ -122,7 +122,7 @@ const ContactForm = () => {
     <div className='flex flex-col justify-start items-center gap-10 w-full text-fg relative'>
       <div className='flex flex-row justify-between w-full p-2 sm:p-8 flex-wrap min-[1208px]:gap-8'>
         <div className='locations flex flex-col justify-between max-[1208px]:w-full w-[30%]'>
-          <h1 className='min-[1500px]:text-6xl text-5xl mb-12'>So <span className='text-blue-300'>kontaktierst</span> du die ATBS.</h1>
+          <h1 className='min-[1500px]:text-6xl md:text-5xl text-4xl mb-12'>So <span className='text-blue-300'>kontaktieren</span> sie die ATBS.</h1>
           <div className='flex flex-col w-full max-[700px]:hidden max-[1208px]:flex-row max-[1208px]:justify-between max-[1208px]:px-8'>
             <div className='mb-8 lg:mb-16'>
                 <p className='text-xl xl:text-2xl font-bold mb-4'>Braunschweig</p>
