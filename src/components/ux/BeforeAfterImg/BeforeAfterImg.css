@@ -1,0 +1,54 @@
+.BeforeAfterContainer {
+    @apply relative w-full min-w-[300px] min-h-[600px] h-full;
+
+    .img {
+        @apply absolute w-full h-full left-0 top-0 object-cover object-left cursor-pointer rounded-b-[40px] min-[982px]:rounded-none min-[982px]:rounded-l-[40px];
+    } 
+
+    .slider {
+        -webkit-appearance: none;
+        appearance: none;
+        @apply flex justify-center items-center absolute w-full h-full m-0 transition-all bg-dark bg-opacity-30 rounded-b-[40px] min-[982px]:rounded-none min-[982px]:rounded-l-[40px]; 
+        
+        &:hover {
+            @apply bg-opacity-20;
+        }
+
+        &::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            cursor: pointer;
+            @apply bg-light w-[4px] h-full rounded-none outline-none border-none;
+        }
+
+        &::-moz-range-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            cursor: pointer;
+            @apply bg-light w-[4px] h-full rounded-none outline-none border-none;
+        }
+    }
+
+    .slider-button {
+        top: calc(50% - 18px);
+        @apply w-[30px] h-[30px] pointer-events-none absolute rounded-full bg-light flex justify-center items-center;
+
+        &::after {
+            content: '';
+            padding: 3px;
+            display: inline-block;
+            border: solid #5D5D5D;
+            border-width: 0 2px 2px 0;
+            transform: rotate(-45deg);
+        }
+
+        &::before {
+            content: '';
+            padding: 3px;
+            display: inline-block;
+            border: solid #5D5D5D;
+            border-width: 0 2px 2px 0;
+            transform: rotate(135deg);
+        }
+    }
+}

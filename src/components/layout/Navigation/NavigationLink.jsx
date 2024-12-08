@@ -2,8 +2,9 @@ import React from 'react'
 
 const NavigationLink = ({text, active}) => {
   return (
-    <li className={`layoutNavigationItem 
-                    ${active ? "layoutNavigationItemActive bg-light bg-opacity-40 text-xl rounded-full shadow-lg" : ""}`}>
+    <li className={`layoutNavigationItem
+                    ${text == "Book now" ? 'layoutNavigationBooking' : null} 
+                    ${active ? "active" : ""}`}>
         {text}
     </li>
   )

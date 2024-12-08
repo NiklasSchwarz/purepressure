@@ -20,10 +20,9 @@ export default function Navbar() {
 
     // TODO: dynamisch zur Weberweiterung 
     const links = [
-        { id:"1", text: "Übersicht", href: "/"},
-        { id:"2", text: "Unternehmen", href: "/company"},
-        { id:"3", text: "Kontakt", href: "/contact"},
-        { id:"4", text: "Karriere", href: "/carrer"}
+        { id:"1", text: "Home", href: "/"},
+        { id:"2", text: "Appointments", href: "/booking"},
+        { id:"3", text: "Book now", href: "/booking#new"}
     ]
     
     useEffect(() => {
@@ -50,7 +49,7 @@ export default function Navbar() {
     return (
         <header className='layoutNavigationHeader'>
             <Link className='layoutNavigationLogo' href="/">
-                <img src="ATBS_logo_clean.png" alt="ATBS_LOGO" className='layoutNavigationLogoImg'/>
+                <img src="logo.png" alt="LOGO" className='layoutNavigationLogoImg'/> 
             </Link>
             <nav className={nav ? 'layoutNavigation' : 'layoutNavigation layoutNavigationHidden'}>
                 <ul>

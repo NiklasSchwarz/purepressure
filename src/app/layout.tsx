@@ -15,9 +15,9 @@ const inter = Inter({ subsets: ['latin'] })
 
 
 export const metadata: Metadata = {
-  title: 'ATBS Abkanttechnik Braunschweig - Blechverarbeitung',
-  description: 'Die Lösung gegen lange Durchlaufzeiten und hohe Beschaffungskosten für Ihre Metallteile ist hier. ATBS Braunschweig ist Ihr zuverlässiger Partner für die Fertigung metallischer Komponenten durch Schweißen, Kanten, Lasern. ',
-  keywords: ['Blechverarbeitung', 'Metallverarbeitung', 'Stahl', 'Edelstahl', 'Aluminium', 'Schweißen', 'Kanten', 'Lasern'],
+  title: 'Pure Pressure Hawaii - Car Detailing and Pressure Washing Service',
+  description: 'Professional cleaning service that will bring you immaculate results, we specialize in premium car detailing services whether you need a quick refresh or a deep clean, our expert team delivers unparalleled results. Located in Kaneohe, we’re your go-to destination for keeping your car looking and feeling new in Hawaii.',
+  keywords: ['Pressure', 'Washing', 'Car', 'Detailing', 'Hawaii', 'Cheap', 'Coating', 'Ceramic', 'Cleaning'],
 }
 
 export default function RootLayout({
@@ -26,7 +26,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {  
   return (
-    <html lang="de">
+    <html lang="en">
       <body className={inter.className}>
         <div className="">
           <Navbar />

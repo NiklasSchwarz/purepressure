@@ -1,50 +1,29 @@
-import Competences from '@/components/ux/Competences/Competences'
-import Rondell from '@/components/ux/Rondell/Rondell'
-import Head from '@/components/ux/Head/Head'
-import Contact from '@/components/ux/Contact/Contact'
-import SliderTxt from '@/components/ux/Slider/Slider'
-import CardGrid from '@/components/ux/CardGrid/CardGrid'
-import Jobs from '@/components/ux/Jobs/Jobs'
+import ContactForm from '@/components/forms/Contact/ContactForm'
+import TrashClean from '@/components/ux/TrashClean/TrashClean'
+import Price from '@/components/ux/Prices/Prices'
+import About from '@/components/ux/About/About'
 
 export default function Home() {
   return ( 
     <>
-    <section className='overflow-visible'>
-      <Head 
-        heading='Ihre Ideen, perfektioniert in Metall.'
-        imageSrc='/images/actions/lasern_3.jpg' 
-        imageAlt='HeaderImage'
-        text='Mit uns als ihren Partner haben Sie keine langen Durchlaufzeiten oder hohe Beschaffungskosten.'
-        subtitle='Kennen Sie lange Durchlaufzeiten oder hohe Beschaffungskosten? Die ATBS nicht.'>
-      </Head>
-    </section>
-    <section id="services">
-      <CardGrid/>    
-    </section>
-    <section>
-      <Competences images={['/images/maschines/DSC07376.jpg', '/images/maschines/DSC07410.jpg', '/images/maschines/laser.jpg', '/images/maschines/laser_2.jpg', '/images/maschines/laser_3.jpg', '/images/maschines/weld.jpg', '/images/maschines/fräse.jpg', '/images/maschines/fräse_2.jpg', '/images/maschines/fräse_3.jpg', '/images/maschines/fräse_4.jpg', '/images/maschines/fräse_5.jpg']}      ></Competences>
-    </section>
-    <section>
-        <SliderTxt 
-          images={['/images/maschines/DSC07376.jpg', '/images/maschines/DSC07410.jpg', '/images/maschines/laser.jpg', '/images/maschines/laser_2.jpg', '/images/maschines/laser_3.jpg', '/images/maschines/weld.jpg', '/images/maschines/fräse.jpg', '/images/maschines/fräse_2.jpg', '/images/maschines/fräse_3.jpg', '/images/maschines/fräse_4.jpg', '/images/maschines/fräse_5.jpg']}
-        /> 
-    </section>
-    <section id="rondell">
-      <Rondell/>
-    </section>
-    <section id="jobs">
-      <Jobs 
-        image='/images/jobs.jpg' 
-        button_text='zum neuen Job'
-      />
-    </section>
-    <section id="last">
-      <Contact 
-        image='/images/maschines/oberfläche2.jpg' 
-        heading='Kontaktieren Sie uns, um Ihr Angebot zu sichern.' 
-        text='Sie haben Interesse an einer Zusammenarbeit mit uns oder vielleicht noch offene Fragen? Dann zögern Sie nicht und treten mit uns in den Kontakt. Wir freuen uns drauf!'
-      />
-    </section>
+      <section id="rondell">
+        <h1 className='mb-20'>Prices</h1>
+        <Price />
+      </section>
+      <section>
+        <p className='text-2xl text-center w-[80%] min-w-[300px] leading-relaxed h-auto'>
+          “At Pure Pressure Hawaii, we’re passionate about cars and committed to excellence. Our mission is to provide top-quality detailing services while ensuring every client drives away satisfied.”
+        </p>
+      </section>
+      <section id="trash-can">
+        <TrashClean></TrashClean>
+      </section>
+      <section>
+        <About button_text='Book an appointment' image='/images/Steering_wheel.jpeg'></About>
+      </section>
+      <section id="last">
+        <ContactForm></ContactForm>
+      </section>
     </>
   )
 }

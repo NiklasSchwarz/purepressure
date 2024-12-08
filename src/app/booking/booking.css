@@ -1,0 +1,37 @@
+.CompanyContainer {
+    @apply flex flex-row gap-10 min-[450px]:w-full relative max-h-[100vh] -right-[40px] min-[450px]:-right-0 w-[110%] min-[450px]:-ml-0 -ml-[20px];
+}
+
+.CompanyText {
+    @apply text-left mt-[110%] min-[400px]:mt-[80%] sm:mt-[60%] md:mt-[25%] p-[20px] pt-[40px] sm:p-[40px] sm:pt-[80px] sm:pr-[80px] bg-bg rounded-tr-[40px] -ml-1 -mb-1 relative w-fit max-w-[80%];
+}
+
+.CompanyText::after {
+    position: absolute;
+    bottom: 3px;
+    right: -80px;
+    height: 80px;
+    width: 80px;
+    border-bottom-left-radius: 50%;
+    content: "";
+    box-shadow: 0 40px 0 0 rgb(var(--color-bg));
+    background-color: rgba(0,0,0,0);
+  }
+
+  .CompanyText::before {
+    position: absolute;
+    top: -80px;
+    left: 3px;
+    height: 80px;
+    width: 80px;
+    border-bottom-left-radius: 50%;
+    content: "";
+    box-shadow: 0 40px 0 0 rgb(var(--color-bg));
+    background-color: rgba(0,0,0,0);
+  }
+
+.CompanyImage {
+    width: 100%;
+    height: calc(100% - 3rem);
+    @apply mt-12 rounded-tl-[40px] min-[450px]:rounded-[40px] rounded-bl-none absolute object-center object-cover -z-10;
+}

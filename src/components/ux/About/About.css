@@ -1,0 +1,66 @@
+.About {
+  width: 100%;
+  @apply flex flex-row justify-between p-6 gap-16 lg:min-h-[600px];
+}
+
+.About_heading {
+  width: 30%;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  @apply p-2;
+}
+
+.About_image {
+  @apply rounded-[40px] w-full h-full object-cover lg:absolute min-h-[400px];
+}
+
+.About_txt {
+  @apply min-[650px]:absolute right-[-1px] bottom-[-1px] rounded-tl-[40px] pl-4 pt-8 xl:pl-12 min-[650px]:max-w-[70%] max-h-[70%] min-[650px]:bg-bg;
+
+  &::before {
+    right: 0;
+    top: -80px;
+    height: 80px;
+    width: 80px;
+    border-bottom-right-radius: 50%;
+    content: "";
+    box-shadow: 0 40px 0 0 rgb(var(--color-bg));
+    background-color: rgba(0,0,0,0);
+    @apply min-[650px]:absolute;
+  }
+
+  &::after {
+    bottom: 0;
+    left: -80px;
+    height: 80px;
+    width: 80px;
+    border-bottom-right-radius: 50%;
+    content: "";
+    box-shadow: 0 40px 0 0 rgb(var(--color-bg));
+    background-color: rgba(0,0,0,0);
+    @apply min-[650px]:absolute;
+  }
+}
+
+@media(max-width: 1024px) {
+  .About {
+    flex-direction: column;
+    @apply gap-2;
+  }
+
+  .About_heading {
+    width: 100%;
+  }
+
+  .About_txt {
+    @apply pl-4 pt-0 min-[650px]:pt-6;
+  }
+}
+
+@media(max-width: 650px) {
+  .About_heading h1 {
+    @apply text-3xl;
+  }
+}

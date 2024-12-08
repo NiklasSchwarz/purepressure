@@ -2,27 +2,35 @@
   * Responsive navigation setup
   */
   .layoutNavigationHeader {
-    @apply mx-auto w-[90%] max-w-[1600px] tracking-wide flex justify-between items-center relative mt-12 px-8 py-4 bg-bg bg-opacity-40 rounded-full shadow-lg;
+    @apply w-full tracking-wide flex justify-between items-center fixed px-16 py-2 bg-gray-300 z-40;
   }
 
   .layoutNavigation {
-    @apply flex justify-end items-center z-40;
+    @apply flex justify-end items-center;
   }
 
   .layoutNavigation > ul {
-    @apply flex gap-2;
+    @apply flex items-center;
   }
 
+  
   .layoutNavigationItem {
-    width: 100%;
-    height: 100%;
-    @apply transition-all duration-300 ease-in px-3 py-1 text-lg font-medium;
+    width: 150px;
+    text-align: center;
+    @apply transition-all ease-in text-lg font-medium rounded-md relative box-border mx-4;
   }
-
+  
+  .layoutNavigationItem.active {
+    @apply font-bold;
+  }
+  
   .layoutNavigationItem:hover {
-    @apply bg-light bg-opacity-20 rounded-full shadow-lg;
+    @apply text-gray-600;
   }
-
+  
+  .layoutNavigationBooking {
+    @apply py-4 bg-green-400 text-light font-bold;
+  }
   
   @media(max-width: 1024px){
     .layoutNavigation > ul {
@@ -30,7 +38,7 @@
       @apply flex flex-col justify-start items-start gap-10      /*Layout*/
              fixed top-0 right-0 z-40                             /*Position*/
              h-full px-14 w-2/3                                   /*Size*/
-             bg-bg bg-opacity-20 backdrop-blur-sm                 /*Background*/
+             bg-bg bg-opacity-30 backdrop-blur-sm                 /*Background*/
              transition-all duration-500 ease-in-out;             /*Transition*/
     }
   
@@ -39,21 +47,26 @@
     }
 
     .layoutNavigationItem {
-      @apply text-xl;
+      @apply text-xl text-left;
+    }
+
+    
+    .layoutNavigationBooking {
+      @apply text-center;
     }
   
     .layoutNavigationItemActive {
       @apply font-semibold;
     }
-
-    .layoutNavigationItemActive:hover {
-      @apply font-semibold;
-    }
   }
   
-  @media(max-width: 895px) {
+  @media(max-width: 700px) {
     .layoutNavigationHeader {
-      @apply mt-4 px-0 bg-transparent shadow-none;
+      @apply px-6;
+    }
+
+    .layoutNavigation > ul {
+      @apply w-full;   
     }
   }
 
@@ -61,13 +74,11 @@
    * navigation logo
    */
    .layoutNavigationLogo {
-     @apply text-2xl font-semibold tracking-wider text-fg w-1/3 z-50 ;
+     @apply z-50 ;
    }
   
    .layoutNavigationLogoImg {
-    width: 60%;
-    min-width: 200px;
-    max-width: 300px;
+    @apply h-[60px];
   }
 
   /*

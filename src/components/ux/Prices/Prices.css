@@ -1,0 +1,21 @@
+.uxPricesContainer {
+    @apply flex flex-row justify-evenly items-start flex-wrap w-full gap-2;
+
+    .uxPriceCard {
+        @apply py-12 px-8 items-center bg-gray-50 rounded-3xl border w-full shadow-md relative;
+
+        .relIcon {
+            @apply absolute -top-1 left-[80%] w-[50px] h-auto;
+        }
+
+        .head {
+            @apply border-b border-gray-100 pb-8 mb-4 flex flex-col m-auto text-center w-[80%];
+        }
+    }
+}
+
+@media(max-width:1024px) {
+    .uxPricesContainer {
+        @apply flex-col items-center gap-8;
+    }
+}

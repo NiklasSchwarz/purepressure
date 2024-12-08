@@ -108,17 +108,17 @@ const CookieModal: React.FC = () => {
         <div className={`uxCookieModal ${hidden ? "hidden" : null}`}>
         <div className='uxCookieModalContent text-fg flex flex-col justify-between'>
             <div className="uxCookieModalWrap">
-                <div className="flex flex-row justify-between"><h3>Privatspähre Einstellungen</h3><button onClick={() => triggerHidden(true)}><FaTimes className='text-2xl'/></button></div>
-                <p>Wenn Sie zustimmen, nutzen wir Dienste von Drittanbietern, die Informationen auf dem Endgerät eines Seitenbesuchers speichern oder dort abrufen. Wir verarbeiten die Informationen dann weiter. All dies hilft uns, unsere Website optimal zu gestalten und unsere Besucher besser zu verstehen. Sie können Ihre Einwilligung mit Wirkung für die Zukunft widerrufen, z.B. auf der linken Seite auf dem Fingerabdruck.</p>
-                <div className="uxCookieModalTextLink"><a href="/imprint" onClick={() => triggerHidden(!hidden)}>Impressum</a><a href="/privacy" onClick={() => triggerHidden(!hidden)}>Datenschutz</a></div>
+                <div className="flex flex-row justify-between"><h3>Privacy Settings</h3><button onClick={() => triggerHidden(true)}><FaTimes className='text-2xl'/></button></div>
+                <p>If you consent, we use third-party services that store or retrieve information on the end device of a site visitor. We then process the information further. All of this helps us to optimise our website and better understand our visitors. You can revoke your consent with effect for the future, e.g. on the left-hand side on the fingerprint.</p>
+                <div className="uxCookieModalTextLink"><a href="/imprint" onClick={() => triggerHidden(!hidden)}>Imprint</a><a href="/privacy" onClick={() => triggerHidden(!hidden)}>Privacy</a></div>
                 <div>
                     <h4 className='mb-4'>Cookies</h4>
                     <ul>
                         <li className='uxCookieModalCookies'>
                             <div className='contentContainer'>
                                 <div className='w-4/5'>
-                                    Essentiell 
-                                    <p className='text-sm text-fg opacity-60'>Diese Technologien sind erforderlich, um die Kernfunktionalität dieser Seite zu gewährleisten.</p>
+                                    Essential 
+                                    <p className='text-sm text-fg opacity-60'>These technologies are required to ensure the core functionality of this site.</p>
                                 </div>
                                 <div className='functionContainer'>
                                     <label className="toggle pointer-events-none">
@@ -129,17 +129,17 @@ const CookieModal: React.FC = () => {
                                 </div>
                             </div>
                             <p className={`cookieDetails ${extended[0] ? "show" : null}`}>
-                                &bull; Google ReCaptcha - verhindert das Nutzen der Seite für Bots <br/>
-                                &bull; Session Cookies  - speichern temporäre Informationen während der Sitzung eines Benutzers<br/>
-                                &bull; Sicherheits Cookies  - Diese Cookies sind notwendig, um die Sicherheit zu gewährleisten<br/>
-                                &bull; Cookie-Zustimmung  - Speichert die Entscheidung des Nutzers bezüglich der Zustimmung zu nicht-essentiellen Cookies.<br/>
+                                &bull; Google ReCaptcha - Prevents bots from using the site <br/>
+                                &bull; Session Cookies  - store temporary information during a user's session<br/>
+                                &bull; Safety Cookies  - These cookies are necessary to ensure security<br/>
+                                &bull; Cookie-Consent  - Saves the user's decision regarding consent to non-essential cookies.<br/>
                             </p>
                         </li>
                         <li className='uxCookieModalCookies'>
                             <div className='contentContainer'>
                                 <div className='w-4/5'>
-                                    Funktional 
-                                    <p className='text-sm text-fg opacity-60'>Der Gebrauch dieser Technologien ermöglicht es uns, die Nutzung der Seite zu analysieren, um die Leistung zu messen und zu verbessern.</p>
+                                    Functional 
+                                    <p className='text-sm text-fg opacity-60'>The use of these technologies enables us to analyse the use of the site in order to measure and improve performance.</p>
                                 </div>
                                 <div className='functionContainer'>
                                     <label className="toggle">
@@ -150,15 +150,15 @@ const CookieModal: React.FC = () => {
                                 </div>
                             </div>
                             <p className={`cookieDetails ${extended[1] ? "show" : null}`}>
-                                &bull; Google Analytics - Übermittelt Informationen, die das Benutzherverhalten aufschlüsseln, um die Seite attraktiver und Lesitungsfähiger zu gestalten<br/>
-                                &bull; Session Tracking  - Ermöglicht uns das Analysieren von Benutzeraktivitäten auf der Seite, um Sichtbarkeit und Performance zu verbessern<br/>
+                                &bull; Google Analytics - Transmits information that breaks down user behaviour to make the site more attractive and readable<br/>
+                                &bull; Session Tracking  - Allows us to analyse user activity on the site to improve visibility and performance<br/>
                             </p>
                         </li>
                         <li className='uxCookieModalCookies'>
                             <div className='contentContainer'>
                                 <div className='w-4/5'>
                                         Marketing 
-                                        <p className='text-sm text-fg opacity-60'>Diese Technologien werden von Werbetreibenden genutzt, um Anzeigen zu schalten, die für ihr Interesse relevant sind.</p>
+                                        <p className='text-sm text-fg opacity-60'>These technologies are used by advertisers to place adverts that are relevant to their interests.</p>
                                     </div>
                                     <div className='functionContainer'>
                                         <label className="toggle">
@@ -169,21 +169,21 @@ const CookieModal: React.FC = () => {
                                     </div>
                                 </div>
                             <p className={`cookieDetails ${extended[2] ? "show" : null}`}>
-                                &bull; aktuell keine<br/>
+                                &bull; none<br/>
                             </p>
                         </li>
                     </ul>
                 </div>
             </div>
             <div className="uxCookieModalButtons">
-                <button onClick={()=>updateCookieSettings(0)} className='bg-gray-300 hover:bg-gray-400'>Speichern</button>
-                <button onClick={()=>updateCookieSettings(2)} className='bg-gray-300 hover:bg-gray-400'>Ablehnen</button>
-                <button onClick={()=>updateCookieSettings(1)} className='bg-green-300 hover:bg-green-400'>Alles akzeptieren</button>
+                <button onClick={()=>updateCookieSettings(0)} className='bg-gray-300 hover:bg-gray-400'>Save Settings</button>
+                <button onClick={()=>updateCookieSettings(2)} className='bg-gray-300 hover:bg-gray-400'>Deny</button>
+                <button onClick={()=>updateCookieSettings(1)} className='bg-green-300 hover:bg-green-400'>Accept all</button>
             </div>
         </div>
         </div>
-        <Modal msg='Cookie-Einstellungen erfolgreich angepasst!' type={1} show={success} />
-        <Modal msg='Cookie-Einstellungen fehlgeschlagen. Bitte erneut versuchen!' type={-1} show={error} />
+        <Modal msg='Cookie-Settings successfully customised!' type={1} show={success} />
+        <Modal msg='Cookie-Settings failed. Please try again!' type={-1} show={error} />
     </>
   );
 };
