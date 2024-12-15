@@ -17,12 +17,10 @@ const TextImage: React.FC<ContentSectionProps> = ({ imageSrc, imageAlt, heading,
   return (
     <div className="uxTextImg">
       <div className="uxTextImgText">
-        <h2 className='break-words'>{heading}<br/><br/></h2>
+        <h1 className='break-words'>{heading}<br/><br/></h1>
         <p>{text}</p>
       </div>
-      <div className="uxTextImgImg">
-        <Image src={imageSrc} alt={imageAlt} layout="responsive" width={700} height={400} />
-      </div>
+        <Image src={imageSrc} alt={imageAlt} width={700} height={400} className='uxTextImgImg' />
     </div>
   );
 };

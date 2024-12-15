@@ -25,19 +25,19 @@ const Price: React.FC<ContentSectionProps> = ({ service, imageAlt, heading, text
 
     const { scrollYProgress:scrollProgress1 } = useScroll({
         target: ref1,
-        offset: (resolution == 0) ? ["0.7 1", "0.9 1"] : (
+        offset: (resolution == 0) ? ["0.8 1", "0.85 1"] : (
                   resolution == 1 ? ["0.8 1", "0.9 1"] : ["0.8 1", "1.2 1"] 
                 )
     });
     const { scrollYProgress:scrollProgress2 } = useScroll({
       target: ref1,
-      offset: (resolution == 0) ? ["0.8 1", "0.95 1"] : (
+      offset: (resolution == 0) ? ["0.8 1", "1 1"] : (
                 resolution == 1 ? ["0.8 1", "0.95 1"] : ["0.8 1", "1.8 1"] 
               )
     });
     const { scrollYProgress:scrollProgress3 } = useScroll({
       target: ref1,
-      offset: (resolution == 0) ? ["0.8 1", "1 1"] : (
+      offset: (resolution == 0) ? ["0.8 1", "1.1 1"] : (
                 resolution == 1 ? ["0.8 1", "1 1"] : ["0.8 1", "3.5 1"] 
               )
     });

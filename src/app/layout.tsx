@@ -1,5 +1,4 @@
 import './globals.css'
-import './privacy/privacy.css'
 
 import type { Metadata } from 'next'
 

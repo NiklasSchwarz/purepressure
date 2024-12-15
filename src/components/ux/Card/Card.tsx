@@ -20,7 +20,7 @@ const Card: React.FC<ContentSectionProps> = ({ headings, text, image, button_tex
                     width={600}
                     height={600}
                     loading="lazy"
-                    className="rounded-[40px] h-80 w-full object-cover object-top"
+                    className="rounded-[40px] h-60 w-full object-cover object-bottom"
                 />
                 <div className="card_card_heading">
                     {headings.map((heading, index) => (
@@ -33,7 +33,7 @@ const Card: React.FC<ContentSectionProps> = ({ headings, text, image, button_tex
                 </div>
             </div>
             <p className="m-4">{text}</p>
-            <a href='/services/#one' className='m-4 flex flex-row gap-2 items-center w-fit hover:text-primary transition-colors bottom-0 text-fg'><FaAngleDoubleRight className='text-primary'/>{button_text}</a>
+            <a href='/services/#one' className='hidden m-4 flex-row gap-2 items-center w-fit hover:text-primary transition-colors bottom-0 text-fg'><FaAngleDoubleRight className='text-primary'/>{button_text}</a>
         </div>
     );
 }

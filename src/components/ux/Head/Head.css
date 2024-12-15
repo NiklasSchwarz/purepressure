@@ -1,13 +1,18 @@
 .uxHead {
     width: 100%;
     @apply flex flex-row justify-between relative;
+
+    &::after {
+      content: '';
+      @apply absolute left-0 top-0 w-full h-full rounded-[40px] bg-black opacity-30 z-0;
+    }
   }
 
   .uxHeadImage {
-    height: calc(100% + 100px);
+    height: 100%;
     object-fit: cover;
     object-position: center;
-    @apply rounded-[40px] rounded-bl-none -z-20 absolute flex-grow -right-[20px] -top-[100px] w-[40%] xl:w-[45%];
+    @apply rounded-[40px] -z-20 absolute w-full;
   }
 
   .uxHeadText {
@@ -15,136 +20,14 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 1rem;
-    @apply relative;
+    @apply relative text-center text-light z-10 mb-16 mt-12;
+
+    p, h1, h2 {
+      @apply text-light;
+    }
   }
-
-  .uxHeadText::after {
-    position: absolute;
-    bottom: 0;
-    right: -72px;
-    height: 80px;
-    width: 80px;
-    border-bottom-left-radius: 50%;
-    content: "";
-    box-shadow: 0 40px 0 0 rgb(var(--color-bg));
-    background-color: rgba(0,0,0,0);
-}
-
-.uxHeadInformation::after {
-  position: absolute;
-  bottom: 0;
-  right: -80px;
-  height: 80px;
-  width: 80px;
-  border-bottom-left-radius: 50%;
-  content: "";
-  box-shadow: 0 40px 0 0 rgb(var(--color-bg));
-  background-color: rgba(0,0,0,0);
-}
-
-.uxHeadText p {
-  max-width: 500px;
-}
-
-.uxHeadText h1 {
-  max-width: 500px;
-  @apply font-normal;
-}
-
-.uxHeadText h4 {
-  max-width: 800px;
-  @apply font-semibold hyphens-auto text-light;
-}
 
 .uxHeadContent {
-  @apply w-[60%] xl:w-[55%] overflow-visible gap-0 flex flex-col justify-between mt-[12%];
+  @apply flex flex-col justify-between mt-[12%] w-full p-12;
 }
 
-@media (max-width: 1280px) {
-  .uxHead {
-    @apply pl-8;
-  }
-  .uxHeadText::after {
-    position: absolute;
-    bottom: 0;
-    right: -86px;
-    height: 80px;
-    width: 80px;
-    border-bottom-left-radius: 50%;
-    content: "";
-    box-shadow: 0 40px 0 0 rgb(var(--color-bg));
-    background-color: rgba(0,0,0,0);
-  }
-}
-
-@media (max-width: 895px) {
-  .uxHead {
-    @apply pl-0;
-  }
-
-  .uxHeadText > h1 {
-    @apply text-4xl leading-tight;
-  }
-
-  .uxHeadImage {
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%
-  }
-
-  .uxHeadContent {
-    @apply mt-[30%] bg-bg rounded-tr-[40px];
-  }
-
-  .uxHeadText {
-    @apply pt-[40px] pr-[40px];
-  }
-
-  .uxHeadText::after {
-    position: absolute;
-    bottom: 0;
-    left: 100%;
-    height: 80px;
-    width: 80px;
-    border-bottom-left-radius: 50%;
-    content: "";
-    box-shadow: 0 40px 0 0 rgb(var(--color-bg));
-    background-color: rgba(0,0,0,0);
-  }
-  .uxHeadText::before {
-    position: absolute;
-    top: -80px;
-    left: 0;
-    height: 80px;
-    width: 80px;
-    border-bottom-left-radius: 50%;
-    content: "";
-    box-shadow: 0 40px 0 0 rgb(var(--color-bg));
-    background-color: rgba(0,0,0,0);
-  }
-}
-
-@media (max-width: 715px) {
-  .uxHeadContent {
-    width: 80%;
-  }
-  .uxHeadInformation {
-    display: none;
-  }
-}
-
-@media (max-width: 500px) {
-  .uxHead {
-    overflow: visible;
-    @apply -mr-8 w-[105%];
-  }
-  .uxHeadText {
-    @apply pr-[20px] pl-2;
-  }
-
-  .uxHeadImage {
-    @apply rounded-tr-none rounded-br-none;
-  }
-}

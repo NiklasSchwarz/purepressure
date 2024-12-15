@@ -19,9 +19,9 @@ const Modal: React.FC<ContentSectionProps> = ({ type, msg, show }) => {
     };
 
     const modalHeaderMap: { [key: number]: string } = {
-        '-1': 'Fehler',
-        '0': 'Nachricht',
-        '1': 'Erfolgreich',
+        '-1': 'Error',
+        '0': 'Information',
+        '1': 'Success',
     };
 
   return (

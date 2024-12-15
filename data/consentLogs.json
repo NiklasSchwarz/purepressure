@@ -58,5 +58,15 @@
     "ip": "::ffff:127.0.0.1",
     "consent": "Necessary",
     "timestamp": "2024-12-06T17:56:47.713Z"
+  },
+  {
+    "ip": "::ffff:127.0.0.1",
+    "consent": "Necessary",
+    "timestamp": "2024-12-12T12:06:57.702Z"
+  },
+  {
+    "ip": "::ffff:127.0.0.1",
+    "consent": "All",
+    "timestamp": "2024-12-12T13:14:30.792Z"
   }
 ]

@@ -21,7 +21,7 @@ export default function Footer() {
               </div>
               <div className='flex-row flex items-center gap-4 justify-normal mx-auto sm:mx-0'>  
                 <FaHome className='text-fg'/>         
-                <p className='text-lg xl:text-2xl text-justify'>  
+                <p className='text-lg xl:text-xl text-justify'>  
                   47-172 Waiohia Place <br />
                   Kaneohe, Hawaii 96744<br /> <br />
                 </p>  
@@ -44,7 +44,8 @@ export default function Footer() {
       </div>
       <div className='flex w-full flex-col gap-1 sm:flex-row items-center sm:justify-around'>
         <div className="flex gap-4 text-sm">
-            <Link className='layoutFooterLink' href="/imprint">Imprint</Link>
+            <Link className='layoutFooterLink' href="/legal">Terms of Use</Link>
+            <Link className='layoutFooterLink' href="/legal">Legal</Link>
             <Link className='layoutFooterLink' href="/privacy">Privacy</Link>
         </div>
         <p className='text-sm flex items-center gap-1'><FaRegCopyright/>Pure Pressure Hawaii, Inc.</p>

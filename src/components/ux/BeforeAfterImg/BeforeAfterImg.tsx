@@ -11,7 +11,7 @@ interface ContentSectionProps {
 }
 
 // Erstelle die Funktionale Komponente
-const TextImage: React.FC<ContentSectionProps> = ({ foregroundImg, backgroundImg }) => {
+const BeforeAfter: React.FC<ContentSectionProps> = ({ foregroundImg, backgroundImg }) => {
   const [value, setValue] = useState(50);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -35,4 +35,4 @@ const TextImage: React.FC<ContentSectionProps> = ({ foregroundImg, backgroundImg
   );
 };
 
-export default TextImage;
+export default BeforeAfter;
