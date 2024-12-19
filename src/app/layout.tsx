@@ -1,9 +1,6 @@
 import './globals.css'
 import type { Metadata } from 'next'
 
-import ReactGA from 'react-ga4';
-ReactGA.initialize("G-JNMJVK8C0Q");
-
 //Components
 import Navbar from '@/components/layout/Navigation/Navigation'
 import ScrollBtn from '@/components/layout/ScrollButton/ScrollButton'
