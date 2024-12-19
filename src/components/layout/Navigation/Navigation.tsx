@@ -57,7 +57,7 @@ export default function Navbar() {
                 <ul>
                     {
                         links.map((item, index) => (
-                            <Link key={item.id} href={`${item.href}?${query}`}>
+                            <Link key={item.id} href={`${item.href}?${query ? `?${query}` : ''}`}>
                                 <div className={`${activeIdx != 0 ? "text-fg" : "text-fg"}`} onClick={() => {setNav(false)}}>
                                     <NavigationLink text={item.text} active={activeIdx === index} /> 
                                 </div> 
