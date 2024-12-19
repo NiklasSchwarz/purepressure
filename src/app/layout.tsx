@@ -1,6 +1,9 @@
 import './globals.css'
-
 import type { Metadata } from 'next'
+
+import ReactGA from 'react-ga';
+const TRACKING_ID = "G-JNMJVK8C0Q"; 
+ReactGA.initialize(TRACKING_ID);
 
 //Components
 import Navbar from '@/components/layout/Navigation/Navigation'

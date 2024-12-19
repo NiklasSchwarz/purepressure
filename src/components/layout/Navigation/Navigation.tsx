@@ -3,7 +3,7 @@
 
 import './Navigation.css'
 import React, {useEffect, useState} from 'react'
-import { usePathname } from 'next/navigation'
+import { usePathname, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import NavigationLink from './NavigationLink'
 
@@ -12,7 +12,9 @@ import NavigationLink from './NavigationLink'
 export default function Navbar() {
     const [nav, setNav] = useState(false);
     const [activeIdx, setActiveIdx] = useState(0);
-    
+    const searchParams = useSearchParams();
+    const query = searchParams?.toString();
+
     
     //Check if window renders
     const isBrowser = () => typeof window !== 'undefined';
@@ -55,7 +57,7 @@ export default function Navbar() {
                 <ul>
                     {
                         links.map((item, index) => (
-                            <Link key={item.id} href={item.href}>
+                            <Link key={item.id} href={`${item.href}?${query}`}>
                                 <div className={`${activeIdx != 0 ? "text-fg" : "text-fg"}`} onClick={() => {setNav(false)}}>
                                     <NavigationLink text={item.text} active={activeIdx === index} /> 
                                 </div> 

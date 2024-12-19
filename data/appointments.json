@@ -1,0 +1,22 @@
+[
+    {
+        "e-mail": "niklas.schwarz1@yahoo.de",
+        "date": "20-12-2024",
+        "service": "bronze",
+        "timeslot": "8:00 AM",
+        "id": "000003e8-bcc6-21ef-af00-325096b39f47",
+        "address": "47-172 Waiohia Place, 96744 Kaneohe",
+        "name": "Niklas Schwarz",
+        "extern" : "false"
+    },
+    {
+        "e-mail": "niklas.schwarz1@yahoo.de",
+        "date": "20-12-2024",
+        "service": "bronze",
+        "timeslot": "9:30 AM",
+        "id": "000003e8-bcc6-21ef-af00-325096b21472",
+        "address": "47-172 Waiohia Place, 96744 Kaneohe",
+        "name": "Niklas Schwarz",
+        "extern" : "false"
+    }
+]

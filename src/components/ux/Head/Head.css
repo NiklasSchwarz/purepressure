@@ -1,6 +1,6 @@
 .uxHead {
     width: 100%;
-    @apply flex flex-row justify-between relative;
+    @apply flex flex-row justify-between relative items-center;
 
     &::after {
       content: '';
@@ -16,11 +16,11 @@
   }
 
   .uxHeadText {
-    width: 100%;
+    width: 80%;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    @apply relative text-center text-light z-10 mb-16 mt-12;
+    @apply relative text-center text-light z-10 mb-16 mt-12 mx-auto;
 
     p, h1, h2 {
       @apply text-light;
