@@ -112,3 +112,31 @@ input[type="checkbox"]:checked::after {
     @apply cursor-pointer text-dark;
   }
 }
+
+input:-webkit-autofill {
+  background-color: transparent !important;
+  box-shadow: none !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+/* Override autofill background color for Firefox */
+input:-moz-autofill {
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
+
+/* General autofill styles (for other browsers) */
+input:autofill {
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
+
+/* Ensure placeholder is visible */
+input::placeholder {
+  color: #888; /* Set your desired placeholder color */
+}
+
+/* Optional: Adjust placeholder color when input is autofilled */
+input:-webkit-autofill::placeholder {
+  color: #888 !important; /* Make sure placeholder is visible after autofill */
+}

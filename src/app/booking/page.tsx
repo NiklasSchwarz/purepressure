@@ -3,7 +3,8 @@ import './booking.css'
 import { Calendar } from "@/components/ui/calendar"
 import { useSearchParams } from 'next/navigation'
 
-import React, { useEffect, useState } from 'react';
+import ReCAPTCHA from 'react-google-recaptcha';
+import React, { useEffect, useRef, useState } from 'react';
 import Loading from '../loading';
 import Modal from '@/components/ux/Modal/Modal';
 import Head from '@/components/ux/Head/Head';
@@ -57,10 +58,20 @@ function validateInput(email: string, name: string, surname: string, zip: string
   }
 }
 
+function validateInputCancel(email: string, name: string, surname: string, id: string): Record<string, boolean> {
+  return {
+    'email': emailRegex.test(email),
+    'name': nameRegex.test(name),
+    'surname': nameRegex.test(surname),
+    'id': uuidRegex.test(id)
+  }
+}
+
 const nrReg = /^[A-Za-z0-9]{1,}$/; 
 const zipReg = /^[0-9]{5}$/; 
 const nameRegex = /^[A-Za-zÀ-ÖØ-ÿ\s'-.]{2,}$/;
 const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+const uuidRegex = /^[A-Za-z0-9À-ÖØ-ÿ\s'-.]{36,}$/;
 const client_sitekey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
 
 async function getDiscount(disc: string | null | undefined) {
@@ -122,6 +133,7 @@ async function getTimeslots(date: Date) {
 
 const Appointment = () => {
   const [formData, setFormData] = useState({ name: '', surname: '', email: '', zip: '', nr:'', street:'', state:'', externalWash: false});
+  const [formDataCancel, setFormDataCancel] = useState({ name: '', surname: '', email: '', id: ''});
   const searchParams = useSearchParams()
   const disc_key = searchParams?.get('disc_key')
   const [price, setPrice] = useState<number>(0)
@@ -135,11 +147,33 @@ const Appointment = () => {
   const [selTimeslot, setSelTimeslot] = useState<string>()
   const [loadTimeslots, setLoadTimeslots] = useState(false)
   const [formDataValid, setFormDataValid] = useState<Record<string, boolean>>({})
+  const [formDataValidCancel, setFormDataValidCancel] = useState<Record<string, boolean>>({})
+  const [validFormCancel, setValidFormCancel] = useState<boolean>(false)
   const [validForm, setValidForm] = useState<boolean>(false)
   const [loading, setLoading] = useState<boolean>(false)
   const [error, setError] = useState<boolean>(false);
+  const [error3, setError3] = useState<boolean>(false);
   const [error_zip, setErrorZip] = useState<boolean>(false);
   const [success, setSuccess] = useState<boolean>(false);
+  const [success2, setSuccess2] = useState<boolean>(false);
+  const recaptchaRef = useRef<ReCAPTCHA>(null); 
+  const [captcha, setCaptcha] = useState<string | null>();
+
+  // Function to execute reCAPTCHA and set token
+  const handleRecaptchaExecution = async () => {
+    setLoading(true); // Start loading
+    if (recaptchaRef.current) {
+      try {
+        const recaptchaToken = await recaptchaRef.current.executeAsync(); // Get token
+        setCaptcha(recaptchaToken); // Save token
+        return recaptchaToken;
+      } catch (error) {
+        setError(false);
+        return null;
+      }
+    }
+    return null;
+  };
   
   useEffect(() => {
     setPrice(getPrice(service, specs, multiplierZip))
@@ -160,17 +194,19 @@ const Appointment = () => {
 
   useEffect(() => {
     // If success changes and is true, set timeout to reset it after 2 seconds
-    if (error || success || error_zip) {
+    if (error || success || error_zip || error3 || success2) {
       const timer = setTimeout(() => {
         setError(false); // Reset to null after 2 seconds
         setSuccess(false);
         setErrorZip(false);
+        setError3(false);
+        setSuccess2(false);
       }, 2000);
 
       // Cleanup the timer when component unmounts or `error` changes
       return () => clearTimeout(timer);
     }
-  }, [error, success, error_zip]);
+  }, [error, success, error_zip, error3, success2]);
   
   const handleInputFieldChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -197,6 +233,24 @@ const Appointment = () => {
       }
     }
     setValidForm(Object.values(bufferValidation).every((isValid) => isValid === true) && trash_zip_relation);
+  };
+
+  const handleInputFieldChangeCancel = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+
+    // Update the formData state immediately
+    const updatedFormData = { ...formDataCancel, [name]: value };
+    setFormDataCancel(updatedFormData);
+
+    // Validate using the updated form data
+    const bufferValidation = validateInputCancel(
+        updatedFormData.email,
+        updatedFormData.name,
+        updatedFormData.surname,
+        updatedFormData.id   
+    );
+    setFormDataValidCancel(bufferValidation);
+    setValidFormCancel(Object.values(bufferValidation).every((isValid) => isValid === true));
   };
 
   const handleTimeslots = async () => {
@@ -284,8 +338,72 @@ const Appointment = () => {
     setSpecs(event.target.value)
   }
 
-   const submit = async (event: React.FormEvent) => {
-   }
+  const submit = async (event: React.FormEvent) => {
+    event.preventDefault();
+    const recaptchaToken = await handleRecaptchaExecution();
+
+    if (recaptchaToken) {
+      try {
+        const response = await fetch("/api/contact", {
+          method: "POST",
+          body: JSON.stringify({ ...formData, captcha: recaptchaToken }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        if (response.ok) {
+          setSuccess(true);
+          setFormData({email:'', externalWash:false, name:'', surname:'', nr:'', state:'',street:'',zip:''})
+        } else {
+          setError(true);
+        }
+      } catch (error) {
+        setError(true);
+      }
+    } else {
+      setError(true);
+    }
+
+    // Reset reCAPTCHA for the next use
+    if (recaptchaRef.current) {
+      recaptchaRef.current.reset(); // Reset to prepare for next execution
+    }
+    setLoading(false);
+  }
+
+  const submitCancel = async (event: React.FormEvent) => {
+    event.preventDefault();
+    const recaptchaToken = await handleRecaptchaExecution();
+
+    if (recaptchaToken) {
+      try {
+        const response = await fetch("/api/cancel", {
+          method: "POST",
+          body: JSON.stringify({ ...formDataCancel, captcha: recaptchaToken }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        if (response.ok) {
+          setSuccess2(true);
+          setFormDataCancel({email:'', name:'', surname:'', id:''})
+        } else {
+          setError3(true);
+        }
+      } catch (error) {
+        setError(true);
+      }
+    } else {
+      setError(true);
+    }
+
+    // Reset reCAPTCHA for the next use
+    if (recaptchaRef.current) {
+      recaptchaRef.current.reset(); // Reset to prepare for next execution
+    }
+    setLoading(false);
+  }
+
   return (
     <>
     <section>
@@ -448,16 +566,55 @@ const Appointment = () => {
               ) : <h3> ${price.toFixed(2)}</h3>}
               <p>Payment due after completion of the service</p>
             </div>
+            <ReCAPTCHA ref={recaptchaRef} size='invisible' sitekey={client_sitekey!} onChange={setCaptcha}/>
             <button className={`py-2 rounded-lg shadow-lg hover:brightness-[.97] ease-in-out transition-all duration-300 ${validForm ? 'pointer-events-auto cursor-pointer bg-green-300' : 'pointer-events-none bg-gray-50 opacity-50 '}`} type="submit">
               {!loading ? (<p className='cursor-pointer text-dark min-w-0'>Book</p>) : (<Loading type={'text'}/>)}
             </button>
           </div>
         </div>
       </form>
-      <Modal msg='Your Appointment has been created successfully. Thank You!' type={1} show={success} />
-      <Modal msg='An error occured. Please try again!' type={-1} show={error} />
-      <Modal msg='The zip code is not within our reach' type={-1} show={error_zip} />
     </section>
+    <section>
+      <div className='rounded-[40px] bg-slate-300 flex  max-[1000px]:flex-col  justify-between p-8 min-[700px]:px-16 min-[700px]:py-12 w-full gap-8'>
+        <div className="cancelAppointmentText flex flex-col justify-between flex-grow-1 gap-8">
+          <h2>Cancel Appointment</h2>
+          <p>You can cancel up to 48 hours before your appointment. Just fill in the form.</p>
+        </div>
+        <form className='flex flex-col items-start min-[1001px]:w-[60%]' onSubmit={submitCancel}>
+        <div className="tab">
+          <div className="flex flex-col w-full gap-2 max-w-[608px]">
+          <div className="req"><input type="text" id="id" name="id" className={`input-field border-b-2 border-opacity-50
+                               ${formDataValidCancel['id'] ? 'border-green-300' : null}
+                               ${!formDataValidCancel!['id'] ? 'border-red-300' : null}
+                               ${formDataCancel.id.length == 0 ? 'border-neutral' : null}`}  required placeholder='Appointment ID' onChange={handleInputFieldChangeCancel} value={formDataCancel.id} /></div>
+          <div className="req"><input type="email" id="email" name="email" className={`input-field border-b-2 border-opacity-50
+                               ${formDataValidCancel['email'] ? 'border-green-300' : null}
+                               ${!formDataValidCancel!['email'] ? 'border-red-300' : null}
+                               ${formDataCancel.email.length == 0 ? 'border-neutral' : null}`}  required placeholder='E-Mail' onChange={handleInputFieldChangeCancel} value={formDataCancel.email} /></div>
+          <div className="input-wrapper-2">
+            <div className="req"><input type="text" id="name" name="name" className={`input-field border-b-2 border-opacity-50
+                               ${formDataValidCancel['name'] ? 'border-green-300' : null}
+                               ${!formDataValidCancel!['name'] ? 'border-red-300' : null}
+                               ${formDataCancel.name.length == 0 ? 'border-neutral' : null}`}  required placeholder='Name' onChange={handleInputFieldChangeCancel} value={formDataCancel.name}/></div>
+            <div className="req"><input type="text" id="surname" name="surname" className={`input-field border-b-2 border-opacity-50
+                               ${formDataValidCancel['surname'] ? 'border-green-300' : null}
+                               ${!formDataValidCancel!['surname'] ? 'border-red-300' : null}
+                               ${formDataCancel.surname.length == 0 ? 'border-neutral' : null}`}  required placeholder='Surname' onChange={handleInputFieldChangeCancel} value={formDataCancel.surname}/></div>
+            </div>
+          </div>
+          </div>
+          <ReCAPTCHA ref={recaptchaRef} size='invisible' sitekey={client_sitekey!} onChange={setCaptcha}/>
+          <button className={`py-2 w-[30%] mx-8 rounded-lg shadow-lg hover:brightness-[.97] ease-in-out transition-all duration-300 ${validFormCancel ? 'pointer-events-auto cursor-pointer bg-red-300' : 'pointer-events-none bg-gray-50 opacity-50 '}`} type="submit">
+              {!loading ? (<p className='cursor-pointer text-dark min-w-0'>Cancel</p>) : (<Loading type={'text'}/>)}
+          </button>
+        </form>
+      </div>
+    </section>
+    <Modal msg='Your Appointment has been created successfully. Thank You!' type={1} show={success} />
+    <Modal msg='An error occured. Please try again!' type={-1} show={error} />
+    <Modal msg='The zip code is not within our reach' type={-1} show={error_zip} />
+    <Modal msg='No appointment found.' type={-1} show={error3} />
+    <Modal msg='You canceled your appointment successfully.' type={1} show={success2} />
   </>
   );
 };
