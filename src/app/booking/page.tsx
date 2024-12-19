@@ -7,6 +7,7 @@ import React, { useEffect, useState } from 'react';
 import Loading from '../loading';
 import Modal from '@/components/ux/Modal/Modal';
 import Head from '@/components/ux/Head/Head';
+import { ReactElement, JSXElementConstructor, ReactNode, Key } from 'react';
 
 type Specs = "small" | "medium" | "large" | "month" | "once" | "bi-monthly";
 type Service = "bronze" | "silver" | "gold" | "platinum" | "showroom" | "trash";
@@ -219,7 +220,7 @@ const Appointment = () => {
         if (multiplier) {
           setMultiplier(multiplier)
           if(service == "trash") {
-            setFormData(prevData => ({
+            setFormData((prevData) => ({
               ...prevData,
               externalWash: true,
             }));
@@ -231,7 +232,7 @@ const Appointment = () => {
         if(service == "trash") {
           setValidForm(false);
         }
-        setFormData(prevData => ({
+        setFormData((prevData) => ({
           ...prevData,
           externalWash: false,
         }));
@@ -264,13 +265,13 @@ const Appointment = () => {
 
     if (event.target.value == "trash" && !selTrash) {
       setSelTrash(true)
-      setFormData(prevData => ({
+      setFormData((prevData) => ({
         ...prevData,
         externalWash: true,
       }));
       setSpecs("month")
     } else if (event.target.value != "trash" && selTrash) {
-      setFormData(prevData => ({
+      setFormData((prevData) => ({
         ...prevData,
         externalWash: false,
       }));
@@ -357,7 +358,7 @@ const Appointment = () => {
             mode="single"
             selected={date}
             fromDate={new Date()}
-            disabled = {(date) => isWeekend(date)}
+            disabled = {(date: Date) => isWeekend(date)}
             onSelect={setDate}
             className="rounded-lg border bg-gray-50 shadow-lg w-fit h-fit"
             />
@@ -370,7 +371,7 @@ const Appointment = () => {
               ) : (
                 timeslots.map((timeslot) => (
                   <label
-                  key={timeslot}
+                  key={timeslot} 
                   className={`${selTimeslot === timeslot ? "bg-green-300 text-light" : "bg-gray-50 text-dark"} timeslots hover:brightness-[.97]`}
                   >
                     <input
