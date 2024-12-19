@@ -13,6 +13,9 @@ import Footer from '@/components/layout/Footer/Footer'
 import { Inter } from 'next/font/google'
 import CookieModal from '@/components/services/Cookie/CookieModal'
 import Analytics from '@/components/services/Analytics/analytics';
+import { Suspense } from 'react';
+import { html } from 'framer-motion/client';
+import Loading from './loading';
 const inter = Inter({ subsets: ['latin'] })
 
 
@@ -30,14 +33,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <div className="">
-          <Analytics />
-          <Navbar />
-          {children}
-          <CookieModal/>
-          <ScrollBtn/>
-        </div>
-        <Footer />
+        <Suspense fallback={<Loading></Loading>}>
+            <Analytics />
+            <Navbar />
+            {children}
+            <CookieModal/>
+            <ScrollBtn/>
+            <Footer />
+        </Suspense>
       </body>
     </html>
   )
