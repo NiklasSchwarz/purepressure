@@ -1,9 +1,8 @@
 import './globals.css'
 import type { Metadata } from 'next'
 
-import ReactGA from 'react-ga';
-const TRACKING_ID = "G-JNMJVK8C0Q"; 
-ReactGA.initialize(TRACKING_ID);
+import ReactGA from 'react-ga4';
+ReactGA.initialize("G-JNMJVK8C0Q");
 
 //Components
 import Navbar from '@/components/layout/Navigation/Navigation'
@@ -13,6 +12,7 @@ import Footer from '@/components/layout/Footer/Footer'
 //fonts
 import { Inter } from 'next/font/google'
 import CookieModal from '@/components/services/Cookie/CookieModal'
+import Analytics from '@/components/services/Analytics/analytics';
 const inter = Inter({ subsets: ['latin'] })
 
 
@@ -31,6 +31,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <div className="">
+          <Analytics />
           <Navbar />
           {children}
           <CookieModal/>
