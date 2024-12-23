@@ -5,16 +5,19 @@ import './Cookies.css';
 
 import React, { useEffect, useState } from 'react';
 import { FaTimes, FaCookieBite, FaChevronDown} from 'react-icons/fa'
+import Loading from '@/app/loading';
 
 const CookieModal: React.FC = () => {
   const [hidden, triggerHidden] = useState<boolean>(true);
   const [extended, setExtended] = useState<boolean[]>([false, false, false]);
   const [marketingCookie, setMarketing] = useState<boolean>(false);
   const [funtionalCookie, setFunctional] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false);
   const [success, setSuccess] = useState<boolean>(false);
 
   useEffect(() => {
+    setLoading(true);
     event?.preventDefault();
     const getCookieConsent = async () => {
         const response = await fetch("/api/cookies", {
@@ -36,7 +39,9 @@ const CookieModal: React.FC = () => {
         }
       }
       getCookieConsent();
+      setLoading(false);
   }, []); // Empty dependency array ensures this runs only once when the component mounts
+
   useEffect(() => {
     // If success changes and is true, set timeout to reset it after 2 seconds
     if (error || success) {
@@ -73,7 +78,7 @@ const CookieModal: React.FC = () => {
         setFunctional(false);
         setMarketing(false);       
     }
-
+    setLoading(true);
     try {
         const response = await fetch("/api/cookies", {
           method: "POST",
@@ -93,6 +98,7 @@ const CookieModal: React.FC = () => {
         triggerHidden(true);
         setError(true);
       }
+    setLoading(false);
   }
 
   useEffect(() => {
@@ -175,11 +181,13 @@ const CookieModal: React.FC = () => {
                     </ul>
                 </div>
             </div>
-            <div className="uxCookieModalButtons">
+                {loading ? (<Loading type='text' />) : ( 
+                    <div className="uxCookieModalButtons">
                 <button onClick={()=>updateCookieSettings(0)} className='bg-gray-300 hover:bg-gray-400'>Save Settings</button>
                 <button onClick={()=>updateCookieSettings(2)} className='bg-gray-300 hover:bg-gray-400'>Deny</button>
                 <button onClick={()=>updateCookieSettings(1)} className='bg-green-300 hover:bg-green-400'>Accept all</button>
-            </div>
+                </div>
+            )}
         </div>
         </div>
         <Modal msg='Cookie-Settings successfully customised!' type={1} show={success} />

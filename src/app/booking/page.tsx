@@ -22,13 +22,14 @@ type PricingTable = {
 const pricingTable: PricingTable = {
   bronze: { small: 9, medium: 13, large: 17 },
   silver: { small: 19, medium: 24, large: 29 },
-  gold: { small: 40, medium: 45, large: 49 },
-  platinum: { small: 65, medium: 70, large: 75 },
-  showroom: { small: 100, medium: 120, large: 140 },
+  gold: { small: 50, medium: 55, large: 59 },
+  platinum: { small: 100, medium: 120, large: 140 },
+  showroom: { small: 150, medium: 200, large: 250 },
   trash: { month: 9, once: 39, default: 15 },
 };
 
 function getPrice(service: string, specs: string, multiplier: number): number {
+  console.log(multiplier)
   if (!isService(service) || !isSpecs(specs)) {
     console.warn(`Invalid service or specs: ${service}, ${specs}`);
     return 0;
@@ -46,7 +47,7 @@ function isSpecs(value: string): value is Specs {
   return ["small", "medium", "large", "month", "once", "bi-monthly"].includes(value);
 }
 
-function validateInput(email: string, name: string, surname: string, zip: string, nr: string, street: string, state: string): Record<string, boolean> {
+function validateInput(email: string, name: string, surname: string, zip: string, nr: string, street: string, state: string, phone:string): Record<string, boolean> {
   return {
     'email': emailRegex.test(email),
     'name': nameRegex.test(name),
@@ -54,7 +55,8 @@ function validateInput(email: string, name: string, surname: string, zip: string
     'street': nameRegex.test(street),
     'state': nameRegex.test(state),
     'zip': zipReg.test(zip),
-    'nr': nrReg.test(nr)
+    'nr': nrReg.test(nr),
+    'phone': phoneRegex.test(phone)
   }
 }
 
@@ -67,6 +69,7 @@ function validateInputCancel(email: string, name: string, surname: string, id: s
   }
 }
 
+const phoneRegex = /^\+?[1-9]\d{1,14}$|^\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4}$/;
 const nrReg = /^[A-Za-z0-9]{1,}$/; 
 const zipReg = /^[0-9]{5}$/; 
 const nameRegex = /^[A-Za-zÀ-ÖØ-ÿ\s'-.]{2,}$/;
@@ -132,7 +135,7 @@ async function getTimeslots(date: Date) {
 }
 
 const Appointment = () => {
-  const [formData, setFormData] = useState({ name: '', surname: '', email: '', zip: '', nr:'', street:'', state:'', externalWash: false});
+  const [formData, setFormData] = useState({ name: '', surname: '', email: '', zip: '', nr:'', street:'', state:'', internalWash: true, phone:''});
   const [formDataCancel, setFormDataCancel] = useState({ name: '', surname: '', email: '', id: ''});
   const searchParams = useSearchParams()
   const disc_key = searchParams?.get('disc_key')
@@ -176,8 +179,13 @@ const Appointment = () => {
   };
   
   useEffect(() => {
-    setPrice(getPrice(service, specs, multiplierZip))
-  }, [multiplierZip, service, specs]); 
+    if (formData.internalWash) {
+      setPrice(getPrice(service, specs, 1))
+    }
+    else { 
+      setPrice(getPrice(service, specs, multiplierZip))
+    }
+  }, [multiplierZip, service, specs, formData.internalWash]); 
 
   useEffect(()=> {
     async function getDiscountHelper() {
@@ -209,8 +217,9 @@ const Appointment = () => {
   }, [error, success, error_zip, error3, success2]);
   
   const handleInputFieldChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-
+    const { name, type } = e.target;
+    const value = type === "checkbox" ? (e.target as HTMLInputElement).checked : e.target.value;
+  
     // Update the formData state immediately
     const updatedFormData = { ...formData, [name]: value };
     setFormData(updatedFormData);
@@ -223,12 +232,14 @@ const Appointment = () => {
         updatedFormData.zip,
         updatedFormData.nr,
         updatedFormData.street,
-        updatedFormData.state    );
+        updatedFormData.state,
+        updatedFormData.phone
+      );
     setFormDataValid(bufferValidation);
 
     let trash_zip_relation = true;
     if (e.target.name != "service" && e.target.value == "trash" ) {
-      if (!updatedFormData.externalWash) {
+      if (updatedFormData.internalWash) {
         trash_zip_relation = false;
       }
     }
@@ -268,7 +279,7 @@ const Appointment = () => {
   };
 
   const handleZipCode = async () => {
-    if (formDataValid['zip']) {
+    if (formDataValid['zip'] || !formData.internalWash) {
       try {
         const multiplier = await getZipCodeMoltiplier(formData.zip); 
         if (multiplier) {
@@ -276,7 +287,7 @@ const Appointment = () => {
           if(service == "trash") {
             setFormData((prevData) => ({
               ...prevData,
-              externalWash: true,
+              internalWash: false,
             }));
           }
           return;
@@ -288,19 +299,20 @@ const Appointment = () => {
         }
         setFormData((prevData) => ({
           ...prevData,
-          externalWash: false,
+          internalWash: true,
         }));
         setErrorZip(true);
         setMultiplier(1);
       }
+      return;
     }
   }
 
   useEffect(()=> {
-    if(formData.externalWash || formData) {
+    if(formData.internalWash || formData) {
       handleZipCode();
     }
-  }, [formData.externalWash, formData.zip]);
+  }, [formData.internalWash, formData.zip]);
 
   useEffect (()=> {
     if(date) {
@@ -321,13 +333,13 @@ const Appointment = () => {
       setSelTrash(true)
       setFormData((prevData) => ({
         ...prevData,
-        externalWash: true,
+        internalWash: false,
       }));
       setSpecs("month")
     } else if (event.target.value != "trash" && selTrash) {
       setFormData((prevData) => ({
         ...prevData,
-        externalWash: false,
+        internalWash: true,
       }));
       setSelTrash(false)
       setSpecs("small")
@@ -353,7 +365,7 @@ const Appointment = () => {
         });
         if (response.ok) {
           setSuccess(true);
-          setFormData({email:'', externalWash:false, name:'', surname:'', nr:'', state:'',street:'',zip:''})
+          setFormData({email:'', internalWash:false, name:'', surname:'', nr:'', state:'', street:'', zip:'', phone:''})
         } else {
           setError(true);
         }
@@ -407,7 +419,7 @@ const Appointment = () => {
   return (
     <>
     <section>
-    <Head imageSrc={'/images/white_chev.jpeg'} imageAlt={'Header Iimg'} heading={'Booking'} subtitle={'Manage your Appointments'} text={'Here you can make an appointment with me, get a cost estimate or cancel your appointment'} btn={false}></Head>
+    <Head imageSrc={'/images/white_chev.jpeg'} imageAlt={'Header Iimg'} heading={'Booking'} subtitle={'Manage your appointments with ease'} text={'Book a new appointment or cancel an existing one quickly and conveniently.'} btn={false}></Head>
     </section>
     <section className='text-left justify-start items-start'>
       <h2 className='p-8'>Book an appointment</h2>
@@ -415,7 +427,8 @@ const Appointment = () => {
         <div className="tab">
           <h4>Select a service:</h4>
           <div className="services">
-          {["bronze", "silver", "gold", "platinum", "showroom", "trash"].map((item) => (
+          {/*{["bronze", "silver", "gold", "platinum", "showroom", "trash"].map((item) => ( */}
+          {["bronze", "silver", "gold", "platinum", "showroom"].map((item) => (
               <label
                 key={item}
                 className={`${service === item ? "bg-green-300 text-light" : "bg-gray-50 text-dark"} radio-service hover:brightness-[.97]`}
@@ -450,6 +463,7 @@ const Appointment = () => {
                 </label>
             ))}
             </div>
+            {/*
             <div className={`${selTrash ? "opacity-100" : "opacity-40 pointer-events-none"} services`}>
               {["month", "bi-monthly", "once"].map((item) => (
                 <label
@@ -467,6 +481,7 @@ const Appointment = () => {
               ))}
             </div>
             <p>* Please select the date, where the trash is collected. You only need to book the first appointment. Every other is scheduled after the first clean.</p>
+            */}
           </div>
         </div>
         <div className="tab">
@@ -508,30 +523,33 @@ const Appointment = () => {
         </div>
         <div className="tab">
           <h4>Address:</h4>
-          <div className='grid grid-cols-1 min-[900px]:grid-cols-[400px_200px] min-[1200px]:grid-cols-[600px_200px] gap-4'>
-            <div className="input-wrapper w-full">
-              <div className="req"><input type="text" id="street" name="street" className={`input-field border-b-2 border-opacity-50
-                               ${formDataValid['street'] ? 'border-green-300' : null}
-                               ${!formDataValid!['street'] ? 'border-red-300' : null}
-                               ${formData.street.length == 0 ? 'border-neutral' : null}`}  required placeholder='Street name' onChange={handleInputFieldChange} value={formData.street}/> </div>
-              <div className="req"><input type="text" id="nr" name="nr" className={`input-field border-b-2 border-opacity-50
-                               ${formDataValid['nr'] ? 'border-green-300' : null}
-                               ${!formDataValid!['nr'] ? 'border-red-300' : null}
-                               ${formData.nr.length == 0 ? 'border-neutral' : null}`}  required placeholder='Nr.' onChange={handleInputFieldChange} value={formData.nr}/></div>
-              <div className="req"><input type="text" id="state" name="state" className={`input-field border-b-2 border-opacity-50
-                               ${formDataValid['state'] ? 'border-green-300' : null}
-                               ${!formDataValid!['state'] ? 'border-red-300' : null}
-                               ${formData.state.length == 0 ? 'border-neutral' : null}`}  required placeholder='State' onChange={handleInputFieldChange} value={formData.state} /></div>
-              <div className="req"><input type="text" id="zip" name="zip" className={`input-field border-b-2 border-opacity-50
-                               ${formDataValid['zip'] ? 'border-green-300' : null}
-                               ${!formDataValid!['zip'] ? 'border-red-300' : null}
-                               ${formData.zip.length == 0 ? 'border-neutral' : null}`}  required placeholder='ZIP-Code' onChange={handleInputFieldChange} value={formData.zip} /></div>
+          <div>
+            <div className='grid grid-cols-1 min-[900px]:grid-cols-[400px_200px] min-[1200px]:grid-cols-[600px_200px] gap-4'>
+              <div className="input-wrapper w-full">
+                <div className="req"><input type="text" id="street" name="street" className={`input-field border-b-2 border-opacity-50
+                                ${formDataValid['street'] ? 'border-green-300' : null}
+                                ${!formDataValid!['street'] ? 'border-red-300' : null}
+                                ${formData.street.length == 0 ? 'border-neutral' : null}`}  required placeholder='Street name' onChange={handleInputFieldChange} value={formData.street}/> </div>
+                <div className="req"><input type="text" id="nr" name="nr" className={`input-field border-b-2 border-opacity-50
+                                ${formDataValid['nr'] ? 'border-green-300' : null}
+                                ${!formDataValid!['nr'] ? 'border-red-300' : null}
+                                ${formData.nr.length == 0 ? 'border-neutral' : null}`}  required placeholder='House Nr.' onChange={handleInputFieldChange} value={formData.nr}/></div>
+                <div className="req"><input type="text" id="state" name="state" className={`input-field border-b-2 border-opacity-50
+                                ${formDataValid['state'] ? 'border-green-300' : null}
+                                ${!formDataValid!['state'] ? 'border-red-300' : null}
+                                ${formData.state.length == 0 ? 'border-neutral' : null}`}  required placeholder='State' onChange={handleInputFieldChange} value={formData.state} /></div>
+                <div className="req"><input type="text" id="zip" name="zip" className={`input-field border-b-2 border-opacity-50
+                                ${formDataValid['zip'] ? 'border-green-300' : null}
+                                ${!formDataValid!['zip'] ? 'border-red-300' : null}
+                                ${formData.zip.length == 0 ? 'border-neutral' : null}`}  required placeholder='ZIP-Code' onChange={handleInputFieldChange} value={formData.zip} /></div>
+              </div>
+              <label className={`${formData.internalWash ? "bg-green-300" : "bg-gray-50"} ${(selTrash && formData.internalWash) || error_zip ? "pointer-events-none opacity-50" : "cursor-pointer"} px-8 py-6 rounded-lg shadow-lg hover:brightness-[.97] transition-all flex gap-4 items-center`}>
+                <input name="internalWash" checked={formData.internalWash} onChange={handleInputFieldChange} type='checkbox'/>
+                <p className='font-medium text-dark cursor-pointer text-wrap break-words'>Clean at Pure <br className='max-[900px]:hidden'/> Pressure *</p>
+              </label>
+              {/*<p>* A transportation fee is added, if you want to get your car washed at your place. Trash Cans can only be cleaned internally.</p> */}
             </div>
-            <label className={`${formData.externalWash ? "bg-green-300" : "bg-gray-50"} ${(selTrash && formData.externalWash) || error_zip ? "pointer-events-none opacity-50" : "cursor-pointer"} p-8 rounded-lg shadow-lg hover:brightness-[.97] transition-all flex gap-2 items-center`}>
-              <input name="externalWash" checked={formData.externalWash} onChange={handleInputFieldChange} type='checkbox'/>
-              <p className='font-medium text-dark cursor-pointer text-wrap'>clean there *</p>
-            </label>
-            <p>* A transportation fee is added, if you want to get your car washed at your place. Trash Cans can only be cleaned externally.</p>
+            <p className='pt-4'>* If you select "Clean at Pure Pressure", you agree to deliver your car at least 10 minutes before your appointment at Pure Pressure location. No additional transportation fees are added. If you want to get your car washed at a specific address, you need to provide easy access to water & electricity. A transportation fee is added.</p>
           </div>
         </div>
         <div className="tab">
@@ -541,6 +559,10 @@ const Appointment = () => {
                                ${formDataValid['email'] ? 'border-green-300' : null}
                                ${!formDataValid!['email'] ? 'border-red-300' : null}
                                ${formData.email.length == 0 ? 'border-neutral' : null}`}  required placeholder='E-Mail' onChange={handleInputFieldChange} value={formData.email} /></div>
+          <div className="req"><input type="tel" id="phone" name="phone" className={`input-field border-b-2 border-opacity-50
+                               ${formDataValid['phone'] ? 'border-green-300' : null}
+                               ${!formDataValid!['phone'] ? 'border-red-300' : null}
+                               ${formData.phone.length == 0 ? 'border-neutral' : null}`}  required placeholder='Phone number e.g. +44847097323' onChange={handleInputFieldChange} value={formData.phone} /></div>
           <div className="input-wrapper-2">
             <div className="req"><input type="text" id="name" name="name" className={`input-field border-b-2 border-opacity-50
                                ${formDataValid['name'] ? 'border-green-300' : null}
@@ -613,7 +635,7 @@ const Appointment = () => {
     <Modal msg='Your Appointment has been created successfully. Thank You!' type={1} show={success} />
     <Modal msg='An error occured. Please try again!' type={-1} show={error} />
     <Modal msg='The zip code is not within our reach' type={-1} show={error_zip} />
-    <Modal msg='No appointment found.' type={-1} show={error3} />
+    <Modal msg='No appointment found. Please try again our contact us!' type={-1} show={error3} />
     <Modal msg='You canceled your appointment successfully.' type={1} show={success2} />
   </>
   );

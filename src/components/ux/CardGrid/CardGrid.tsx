@@ -31,7 +31,7 @@ export default function CardGrid() {
         <Card 
             image='/images/ceramic_2.jpeg' 
             button_text='' 
-            headings={["Ceramic Coating"]} 
+            headings={["Ceramic coating"]} 
             text='Durable protection and a high-gloss finish to keep your car looking stunning for years.'>   
         </Card>
         <Card 
@@ -67,7 +67,7 @@ export default function CardGrid() {
         <Card 
             image='/images/carpet.webp' 
             button_text='' 
-            headings={["Carpet Shampooing"]} 
+            headings={["Carpet shampooing"]} 
             text='Deep cleaning of carpets to remove stains, dirt, and odors for a fresh, revived look.'>   
         </Card>
     </div>

@@ -124,11 +124,11 @@ const ContactForm = () => {
               <p className='text-xl xl:text-2xl font-bold  mb-4'>Pure Pressure Hawaii</p>
               <div className='flex-row flex items-center gap-4 justify-normal mb-2'>
                 <FaPhone className='text-fg'/> 
-                <a href='callto:+44 7902 098888' className='text-xl xl:text-2xl'><p className='text-xl xl:text-2xl'>+44 7902 098888</p>   </a>    
+                <a href='callto:+18082192128' className='text-xl xl:text-2xl'><p className='text-xl xl:text-2xl cursor-pointer'>+1 (808) 219-2128</p>   </a>    
               </div>
               <div className='flex-row flex items-center gap-4 justify-normal mb-2'>
                 <FaEnvelope className='text-fg'/> 
-                <a href='mailto:Purepressurehawaii@gmail.com' className='text-xl xl:text-2xl'><p className='text-xl xl:text-2xl'>Purepressurehawaii&shy;@gmail.com</p>   </a>    
+                <a href='mailto:Purepressurehawaii@gmail.com' className='text-xl xl:text-2xl'><p className='text-xl xl:text-2xl cursor-pointer'>Purepressurehawaii&shy;@gmail.com</p>   </a>    
               </div>
               <div className='flex-row flex items-center gap-4 justify-normal'>  
                 <FaHome className='text-fg'/>         

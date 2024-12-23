@@ -7,7 +7,7 @@ interface ContentSectionProps {
 
 // Erstelle die Funktionale Komponente
 const Loading: React.FC<ContentSectionProps> = ({ type }) => {
-  return <FaSpinner className={`rotation-icon mx-auto text-3xl text-fg ${type != 'text' ? 'my-28' : ''}`}></FaSpinner> 
+  return <FaSpinner className={`rotation-icon mx-auto text-3xl h-fit text-fg ${type != 'text' ? 'my-28' : ''}`}></FaSpinner> 
 }
 export default Loading;
 

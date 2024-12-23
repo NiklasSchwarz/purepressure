@@ -13,11 +13,11 @@ export default function Footer() {
           <p className='text-lg xl:text-xl font-bold  mb-4'>Pure Pressure Hawaii</p>
               <div className='flex-row flex items-center gap-4 justify-normal mb-2 mx-auto sm:mx-0'>
                 <FaPhone className='text-fg'/> 
-                <a href='callto:+44 7902 098888' className='text-lg xl:text-xl'><p className='text-lg xl:text-xl'>+44 7902 098888</p>   </a>    
+                <a href='callto:+18082192128' className='text-lg xl:text-xl'><p className='text-lg xl:text-xl cursor-pointer'>+1 (808) 219-2128</p>   </a>    
               </div>
               <div className='flex-row flex items-center gap-4 justify-normal mb-2 mx-auto sm:mx-0'>
                 <FaEnvelope className='text-fg'/> 
-                <a href='mailto:Purepressurehawaii@gmail.com' className='text-lg xl:text-xl'><p className='text-lg xl:text-xl'>Purepressure&shy;hawaii&shy;@gmail.com</p>   </a>    
+                <a href='mailto:Purepressurehawaii@gmail.com' className='text-lg xl:text-xl'><p className='text-lg xl:text-xl cursor-pointer'>Purepressure&shy;hawaii&shy;@gmail.com</p>   </a>    
               </div>
               <div className='flex-row flex items-center gap-4 justify-normal mx-auto sm:mx-0'>  
                 <FaHome className='text-fg'/>         
@@ -31,7 +31,7 @@ export default function Footer() {
           <p className='text-xl font-bold text-center sm:text-left'>Contact</p>
           <div className='flex-col flex text-center sm:text-left items-center gap-4 text-lg'>
             <p>
-              Do you ahve any questions or aren't sure if we are the right fit? <br/><br/>
+              Do you have any questions or aren't sure if we are the right fit? <br/><br/>
               Get in touch!
             </p>
             <div className='flex flex-row justify-center sm:justify-start items-center gap-4 w-full pb-10'>

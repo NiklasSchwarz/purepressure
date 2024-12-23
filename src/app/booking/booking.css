@@ -26,117 +26,118 @@
     position: absolute;
     @apply top-0 right-0 text-xl bg-dark bg-opacity-10 rounded-full leading-none my-auto -translate-y-[50%] translate-x-[50%] h-[18px] px-1 py-[2px];
   }
-}
 
-.services {
-  @apply grid grid-cols-1 min-[440px]:grid-cols-2 min-[760px]:grid-cols-3 gap-4 w-fit pb-4;
-
-  p {
-    @apply font-medium text-dark cursor-pointer;
+  .services {
+    @apply grid grid-cols-1 min-[440px]:grid-cols-2 min-[760px]:grid-cols-3 gap-4 w-fit pb-4;
+  
+    p {
+      @apply font-medium text-dark cursor-pointer;
+    }
   }
-}
-
-.radio-service {
-  @apply flex justify-start px-8 py-4 shadow-lg rounded-md items-center gap-2 cursor-pointer transition-all;
-}
-
-.radio-specs {
-  @apply flex justify-start px-8 py-4 shadow-lg rounded-md items-center gap-2 cursor-pointer;
-}
-
-input {
-  appearance: none;
-}
-
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-/* Firefox */
-input[type=number] {
-  -moz-appearance: textfield;
-}
-
-input[type=checkbox] {
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-
-  /* Custom base styles */
-  min-width: 20px;
-  height: 20px;
-  border: 2px solid #ccc;
-  border-radius: 4px;
-  cursor: pointer;
-  display: inline-block;
-  position: relative;
-}
-
-input[type="checkbox"]:checked {
-  @apply bg-green-500 border-green-500;
-}
-
-input[type="checkbox"]:checked::after {
-  content: "✔";
-  color: white;
-  font-size: 14px;
-  font-weight: bold;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-.data-hover {
-  background-color: #0a4951 !important;
-}
-
-.input-wrapper {
-  @apply grid grid-cols-1 min-[480px]:grid-cols-[66%_30%] gap-2 justify-between;
-}
-
-.input-wrapper-2 {
-  @apply grid grid-cols-1 min-[480px]:grid-cols-[45%_45%] gap-2 justify-between;
-}
-
-.timeslots-grid {
-  @apply grid grid-cols-3 min-[475px]:grid-cols-4 max-[560px]:pt-4 min-[561px]:grid-cols-2 min-[700px]:grid-cols-3 justify-between gap-4;
-}
-
-.timeslots {
-  @apply flex justify-start mx-auto py-2 shadow-lg rounded-md items-center gap-2 cursor-pointer min-w-[85px] w-[33%];
-
-  p {
-    @apply cursor-pointer text-dark;
+  
+  .radio-service {
+    @apply flex justify-start px-8 py-4 shadow-lg rounded-md items-center gap-2 cursor-pointer transition-all;
   }
-}
-
-input:-webkit-autofill {
-  background-color: transparent !important;
-  box-shadow: none !important;
-  transition: background-color 5000s ease-in-out 0s;
-}
-
-/* Override autofill background color for Firefox */
-input:-moz-autofill {
-  background-color: transparent !important;
-  box-shadow: none !important;
-}
-
-/* General autofill styles (for other browsers) */
-input:autofill {
-  background-color: transparent !important;
-  box-shadow: none !important;
-}
-
-/* Ensure placeholder is visible */
-input::placeholder {
-  color: #888; /* Set your desired placeholder color */
-}
-
-/* Optional: Adjust placeholder color when input is autofilled */
-input:-webkit-autofill::placeholder {
-  color: #888 !important; /* Make sure placeholder is visible after autofill */
+  
+  .radio-specs {
+    @apply flex justify-start px-8 py-4 shadow-lg rounded-md items-center gap-2 cursor-pointer;
+  }
+  
+  input {
+    appearance: none;
+  }
+  
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  
+  /* Firefox */
+  input[type=number] {
+    -moz-appearance: textfield;
+  }
+  
+  input[type=checkbox] {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+  
+    /* Custom base styles */
+    min-width: 20px;
+    height: 20px;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+  }
+  
+  input[type="checkbox"]:checked {
+    @apply bg-green-500 border-green-500;
+  }
+  
+  input[type="checkbox"]:checked::after {
+    content: "✔";
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .data-hover {
+    background-color: #0a4951 !important;
+  }
+  
+  .input-wrapper {
+    @apply grid grid-cols-1 min-[480px]:grid-cols-[66%_30%] gap-2 justify-between;
+  }
+  
+  .input-wrapper-2 {
+    @apply grid grid-cols-1 min-[480px]:grid-cols-[45%_45%] gap-2 justify-between;
+  }
+  
+  .timeslots-grid {
+    @apply grid grid-cols-3 min-[475px]:grid-cols-4 max-[560px]:pt-4 min-[561px]:grid-cols-2 min-[700px]:grid-cols-3 justify-between gap-4;
+  }
+  
+  .timeslots {
+    @apply flex justify-start mx-auto py-2 shadow-lg rounded-md items-center gap-2 cursor-pointer min-w-[85px] w-[33%];
+  
+    p {
+      @apply cursor-pointer text-dark;
+    }
+  }
+  
+  input:-webkit-autofill {
+    background-color: transparent !important;
+    box-shadow: none !important;
+    transition: background-color 5000s ease-in-out 0s;
+  }
+  
+  /* Override autofill background color for Firefox */
+  input:-moz-autofill {
+    background-color: transparent !important;
+    box-shadow: none !important;
+  }
+  
+  /* General autofill styles (for other browsers) */
+  input:autofill {
+    background-color: transparent !important;
+    box-shadow: none !important;
+  }
+  
+  /* Ensure placeholder is visible */
+  input::placeholder {
+    color: #888; /* Set your desired placeholder color */
+  }
+  
+  /* Optional: Adjust placeholder color when input is autofilled */
+  input:-webkit-autofill::placeholder {
+    color: #888 !important; /* Make sure placeholder is visible after autofill */
+  }
+  
 }

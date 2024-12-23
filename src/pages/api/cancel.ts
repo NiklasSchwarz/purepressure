@@ -1,6 +1,20 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { Resend } from 'resend';
-import { promises as fs } from 'fs';
+import {neon} from '@neondatabase/serverless';
+
+const sql = neon(process.env.DATABASE_URL!);
+
+export async function deleteAppointment(id_value:string) {
+    const sql = neon(process.env.DATABASE_URL!);
+    await sql`BEGIN`
+    const data = await sql`
+        DELETE FROM appointments
+        WHERE id = ${id_value}
+        RETURNING *;
+    `;
+
+    return data;
+}
 
 function validateInput({email, surname, id, name} : {email: string, surname: string, id: string, name: string}): boolean {
   var valid_buffer = false;
@@ -63,18 +77,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
       const captchaValidation = await response.json();
       if (captchaValidation.success) {
-        const file = await fs.readFile(process.cwd() + '/data/appointments.json', 'utf8');
-        const data = JSON.parse(file);
-
-        const appointments = data.find((entry: { id: string }) => entry.id === id);
-        if (!appointments) {
-            res.status(422).json({message: "No appointpent found"})
+        const data = await deleteAppointment(id);
+        if (!data.length) {
+          return res.status(422).json({
+            message: "No appointment was found"});
         }
-        const updatedData = data.filter((entryWrite: Appointment) => entryWrite.id !== id);
-        await fs.writeFile(process.cwd() + '/data/appointments.json', JSON.stringify(updatedData, null, 2));
-
-
-
           try {
             const mailState = await resend.emails.send({
               from: 'Pure Pressure Hawaii <onboarding@resend.dev>',
@@ -91,18 +98,22 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 text: name_space + surname + ' canceled his appointment' + id,
               });
             if (mailState.error || mailState2.error) {
+              await sql`ROLLBACK`;
               return res.status(403).send("Mail Error");
             }
+            await sql`COMMIT`;
             return res.status(200).send("OK");
             
           } catch (error) {
+            await sql`ROLLBACK`;
             return res.status(403).json({message: "Mail Error"});
           }
       }
+      await sql`ROLLBACK`;
       return res.status(422).json({
         message: "Unproccesable request, Invalid captcha code"});
     } catch (error) {
-      console.log(error);
+      await sql`ROLLBACK`;
       return res.status(422).json({ message: "Something went wrong" });
     }
   }

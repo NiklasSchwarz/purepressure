@@ -4,7 +4,7 @@ import { NextRequest, NextResponse, userAgent } from "next/server";
  * allowed origins for requests
  * TODO: remove localhost
  */
-const allowedOrigins = ['https://purepressure.vercel.app', 'https://atbs.de', 'http://localhost:3000']
+const allowedOrigins = ['https://purepressure.vercel.app', 'https://purepressurehawaii.com', 'https://wwww.purepressurehawaii.com', 'http://localhost:3000']
 const corsOptions = {
     'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
     'Access-Control-Allow-Headers': 'Content-Type, Authorization',

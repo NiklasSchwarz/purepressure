@@ -1,5 +1,24 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { promises as fs } from 'fs';
+import {neon} from '@neondatabase/serverless';
+
+const sql = neon(process.env.DATABASE_URL!);
+
+async function getPostcodes(postcode: string): Promise<Postcode> {
+  const sql = neon(process.env.DATABASE_URL!);
+  const result = await sql`
+    SELECT *
+    FROM postcodes
+    WHERE postcode = ${postcode}
+    LIMIT 1;
+  `;
+
+  return result[0] as Postcode;
+}
+
+type Postcode = {
+  postcode: string;
+  multiplier: string;
+};
 
 function validate({postcode} : {postcode: string}): boolean {
   return regex.test(postcode);
@@ -18,15 +37,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       });
     }
     try {
-        const file = await fs.readFile(process.cwd() + '/data/postcodes.json', 'utf8');
-        const postcodes = JSON.parse(file);
-
-        const postcode_data = postcodes.find((entry: { postcode: string; multiplier: number }) => entry.postcode === postcode);
-        if (!postcodes) res.status(423).json({ message: "invalid postcode" });
-
+        const data = await getPostcodes(postcode)
+        if (!data) {
+          return res.status(422).json({ message: "invalid postcode" });
+        }
         return res.status(200).json({
             message: "valid postcode",
-            multiplier: postcode_data.multiplier,
+            multiplier: data.multiplier,
           });
 
     } catch (error) {

@@ -1,59 +1,33 @@
 import { NextApiRequest, NextApiResponse } from "next";
+import {neon} from '@neondatabase/serverless';
 
-const fs = require('fs');
-const path = require('path');
-const filePath = path.join(process.cwd(), 'data', 'consentLogs.json');
+const sql = neon(process.env.DATABASE_URL!);
 
 type CookieObject = {
     [key: string]: string;
   };
 
-// Helper function to check if a date is older than 1 year
-const isOlderThanOneYear = (timestamp: string) => {
-    const oneYearAgo = new Date();
-    oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
-    return new Date(timestamp) < oneYearAgo;
-};
+export async function deleteOldData() {
+    const sql = neon(process.env.DATABASE_URL!);
 
-// Function to save consent data to a JSON file
-async function saveConsentData(ip: string, consent: string) {
-  const consentData = {
-    ip,
-    consent,
-    timestamp: new Date().toISOString(),
-  };
+    const data = await sql`
+        DELETE FROM consent_log
+        WHERE timestamp::timestamp < NOW() - INTERVAL '1 year'
+        RETURNING *;
+    `;
 
-  try {
-    // Check if the file exists
-    let fileData = [];
-    // Check if the file exists and is not empty
-    if (fs.existsSync(filePath)) {
-        const rawData = fs.readFileSync(filePath, 'utf-8');
-        
-        // Ensure fileData is an array before pushing new data
-        try {
-          fileData = JSON.parse(rawData);
-          if (!Array.isArray(fileData)) {
-            fileData = []; // If fileData is not an array, initialize it as an empty array
-          }
-        } catch (err) {
-          fileData = []; // If parsing fails, initialize as empty array
-        }
-    }
+    return data;
+}
 
-    // Filter out data older than one year
-    fileData = fileData.filter(entry => !isOlderThanOneYear(entry.timestamp));
+export async function postData(ip_value:string, consent_value:string) {
+    const timestamp_value = new Date().toISOString();
+    const data = await sql`
+        INSERT INTO consent_log (ip, consent, timestamp)
+        VALUES (${ip_value}, ${consent_value}, ${timestamp_value})
+        RETURNING *;
+    `;
 
-    // Add the new consent data to the array
-    fileData.push(consentData);
-
-    // Write the updated data back to the file
-    fs.writeFileSync(filePath, JSON.stringify(fileData, null, 2));
-    
-    console.log('Consent data saved successfully:', consentData);
-  } catch (err) {
-    throw err;
-  }
+    return data;
 }
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -71,19 +45,20 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         // Extract the email and captcha code from the request body
         const { functional, marketing} = body;
         try {
+            const deletion = await deleteOldData();
             if(functional && marketing) {
                 res.setHeader('Set-Cookie', 'CookieConsent=All; HttpOnly; Secure; Path=/; Max-Age=31536000; SameSite=Lax');
-                saveConsentData(ip, "All");
+                const data = await postData(ip, "All");
             } else {
                 if(functional) { 
                     res.setHeader('Set-Cookie', 'CookieConsent=Functional; HttpOnly; Secure; Path=/; Max-Age=31536000; SameSite=Lax');
-                    saveConsentData(ip, "Functional");
+                    const data = await postData(ip, "Functional");
                 } else if(marketing) {
                     res.setHeader('Set-Cookie', 'CookieConsent=Marketing; HttpOnly; Secure; Path=/; Max-Age=31536000; SameSite=Lax'); 
-                    saveConsentData(ip, "Marketing");
+                    const data = await postData(ip, "Marketing");
                 } else {
                     res.setHeader('Set-Cookie', 'CookieConsent=Necessary; HttpOnly; Secure; Path=/; Max-Age=31536000; SameSite=Lax'); 
-                    saveConsentData(ip, "Necessary");
+                    const data = await postData(ip, "Necessary");
                 }
             }
             return res.status(200).send("Success");
