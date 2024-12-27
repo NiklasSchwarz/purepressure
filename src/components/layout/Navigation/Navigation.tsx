@@ -17,7 +17,7 @@ export default function Navbar() {
   const links = [
     { id: "1", text: "Home", href: "/" },
     { id: "2", text: "Appointments", href: "/booking" },
-    { id: "3", text: "Book now", href: "/booking#new" },
+    { id: "3", text: "Book now", href: "/booking#book" },
   ];
 
   useEffect(() => {

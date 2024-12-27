@@ -27,7 +27,7 @@ const Head: React.FC<ContentSectionProps> = ({ imageSrc, imageAlt, heading, text
           <p className='scale-110 max-w-[80%] mx-auto min-[560px]:mt-2 mt-6'>{text}</p>
           {btn == false ? ( null
             ) : (
-              <a className="mt-12 mx-auto flex flex-row overflow-hidden gap-4 items-center rounded-full bg-blue-400 hover:bg-blue-500 relative group transition-all duration-500 ease-in-out px-12 py-8 shadow-xl w-[230px] cursor-pointer" href="/booking"><FaChevronCircleRight className='absolute right-[87%] transition-all duration-500 group-hover:right-[5%] group-hover:rotate-180 cursor-pointer'/><p className='transition-all duration-500 -mt-[2px] absolute -right-[5%] group-hover:right-[5%] w-full cursor-pointer'>Book an Appointment</p></a>
+              <a className="mt-12 mx-auto flex flex-row overflow-hidden gap-4 items-center rounded-full bg-blue-400 hover:bg-blue-500 relative group transition-all duration-500 ease-in-out px-12 py-8 shadow-xl w-[230px] cursor-pointer" href="/booking#book"><FaChevronCircleRight className='absolute right-[87%] transition-all duration-500 group-hover:right-[5%] group-hover:rotate-180 cursor-pointer'/><p className='transition-all duration-500 -mt-[2px] absolute -right-[5%] group-hover:right-[5%] w-full cursor-pointer'>Book an Appointment</p></a>
             )}
         </div>
       </div>

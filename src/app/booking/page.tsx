@@ -442,7 +442,7 @@ const Appointment = () => {
     </section>
     <section className='text-left justify-start items-start'>
       <h2 className='p-8'>Book an appointment</h2>
-      <form  className="appointment-form-container" onSubmit={submit}>
+      <form id='book'  className="appointment-form-container" onSubmit={submit}>
         <div className="tab">
           <h4>Select a service:</h4>
           <div className="services">
@@ -617,13 +617,13 @@ const Appointment = () => {
     </section>
     <section>
       <div className='rounded-[40px] bg-slate-300 flex  max-[1000px]:flex-col  justify-between p-8 min-[700px]:px-16 min-[700px]:py-12 w-full gap-8'>
-        <div className="cancelAppointmentText flex flex-col justify-between flex-grow-1 gap-8">
+        <div className="cancelAppointmentText flex flex-col justify-between flex-grow-1 gap-8 w-[40%]">
           <h2>Cancel Appointment</h2>
           <p>You can cancel up to 48 hours before your appointment. Just fill in the form.</p>
         </div>
-        <form className='flex flex-col items-start min-[1001px]:w-[60%]' onSubmit={submitCancel}>
+        <form className='flex flex-col items-start min-[1001px]:w-[60%] w-full' onSubmit={submitCancel}>
         <div className="tab">
-          <div className="flex flex-col w-full gap-2 max-w-[608px]">
+          <div className="flex flex-col w-full gap-2">
           <div className="req"><input type="text" id="id" name="id" className={`input-field border-b-2 border-opacity-50
                                ${formDataValidCancel['id'] ? 'border-green-300' : null}
                                ${!formDataValidCancel!['id'] ? 'border-red-300' : null}
