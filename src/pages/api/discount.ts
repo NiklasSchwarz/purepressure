@@ -1,5 +1,17 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { promises as fs } from 'fs';
+import {neon} from '@neondatabase/serverless';
+
+const sql = neon(process.env.DATABASE_URL!);
+
+async function getPercentage(id: string) {
+  const result = await sql`
+    SELECT percentage
+    FROM discounts
+    WHERE id = ${id};
+  `;
+  
+  return result[0]?.percentage ?? null;
+}
 
 function validate({disc} : {disc: string}): boolean {
   return regex.test(disc);
@@ -19,16 +31,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
 
     try {
-        const file = await fs.readFile(process.cwd() + '/data/discounts.json', 'utf8');
-        const discounts = JSON.parse(file);
-
-        const discount = discounts.find((entry: { id: string; percentage: number }) => entry.id === disc);
+        const percentage = await getPercentage(disc);
         
-        if (!discounts) res.status(422).json({ message: "invalid discount" });
+        if (percentage === null) {
+          return res.status(422).json({ message: "Invalid discount" });
+      }
 
         return res.status(200).json({
             message: "valid discount",
-            percentage: discount.percentage,
+            percentage: percentage,
           });
 
     } catch (error) {

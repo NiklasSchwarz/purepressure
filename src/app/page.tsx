@@ -5,6 +5,7 @@ import About from '@/components/ux/About/About'
 import CardGrid from '@/components/ux/CardGrid/CardGrid'
 import TextImage from '@/components/ux/TextImage/TextImage'
 import Head from '@/components/ux/Head/Head'
+import Sizing from '@/components/ux/Prices/Sizing'
 
 export default function Home() {
   return ( 
@@ -19,6 +20,9 @@ export default function Home() {
       <section id="Prices">
         <h1 className='mb-20'>Prices</h1>
         <Price />
+      </section>
+      <section>
+        <Sizing></Sizing>
       </section>
       <section>
         <p className='text-2xl text-center w-[80%] min-w-[300px] leading-relaxed h-auto'>

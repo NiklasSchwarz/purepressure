@@ -1,21 +1,11 @@
 .uxPricesContainer {
-    @apply flex flex-row justify-evenly items-start flex-wrap w-full gap-2;
+    @apply grid max-[500px]:grid-cols-1 max-[649px]:grid-cols-[55%_15%_15%_15%] grid-cols-[40%_20%_20%_20%] text-center w-full bg-gray-50 p-8 rounded-[40px] overflow-hidden shadow-lg;
 
     .uxPriceCard {
-        @apply py-12 px-8 items-center bg-gray-50 rounded-3xl border w-full shadow-md relative;
-
-        .relIcon {
-            @apply absolute -top-1 left-[80%] w-[50px] h-auto;
-        }
+        @apply py-6 px-4 items-center w-full relative m-0;
 
         .head {
-            @apply border-b border-gray-100 pb-8 mb-4 flex flex-col m-auto text-center w-[80%];
+            @apply mb-4 flex flex-col m-auto text-center w-[80%];
         }
-    }
-}
-
-@media(max-width:1024px) {
-    .uxPricesContainer {
-        @apply flex-col items-center gap-8;
     }
 }

@@ -8,7 +8,8 @@ import React, { useEffect, useRef, useState } from 'react';
 import Loading from '../loading';
 import Modal from '@/components/ux/Modal/Modal';
 import Head from '@/components/ux/Head/Head';
-import { ReactElement, JSXElementConstructor, ReactNode, Key } from 'react';
+import Prices from '@/components/ux/Prices/Prices';
+import Sizing from '@/components/ux/Prices/Sizing';
 
 type Specs = "small" | "medium" | "large" | "month" | "once" | "bi-monthly";
 type Service = "bronze" | "silver" | "gold" | "platinum" | "showroom" | "trash";
@@ -147,7 +148,7 @@ const Appointment = () => {
   const [date, setDate] = React.useState<Date | undefined>(new Date())
   const [multiplierZip, setMultiplier] = useState<number>(1)
   const [timeslots, setTimeslots] = useState<string[]>(["8:00 AM", "9:30 AM", "11:00 AM", "12:30 AM", "2:00 PM", "3:30 PM", "5:00 PM", "6:30 PM"])
-  const [selTimeslot, setSelTimeslot] = useState<string>()
+  const [selTimeslot, setSelTimeslot] = useState<string | null>(null)
   const [loadTimeslots, setLoadTimeslots] = useState(false)
   const [formDataValid, setFormDataValid] = useState<Record<string, boolean>>({})
   const [formDataValidCancel, setFormDataValidCancel] = useState<Record<string, boolean>>({})
@@ -243,7 +244,7 @@ const Appointment = () => {
         trash_zip_relation = false;
       }
     }
-    setValidForm(Object.values(bufferValidation).every((isValid) => isValid === true) && trash_zip_relation);
+    setValidForm(Object.values(bufferValidation).every((isValid) => isValid === true) && trash_zip_relation && (selTimeslot !== null));
   };
 
   const handleInputFieldChangeCancel = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -279,6 +280,7 @@ const Appointment = () => {
   };
 
   const handleZipCode = async () => {
+    if (formData.zip == '') return;
     if (formDataValid['zip'] || !formData.internalWash) {
       try {
         const multiplier = await getZipCodeMoltiplier(formData.zip); 
@@ -307,12 +309,16 @@ const Appointment = () => {
       return;
     }
   }
-
+  
   useEffect(()=> {
     if(formData.internalWash || formData) {
       handleZipCode();
     }
   }, [formData.internalWash, formData.zip]);
+
+  useEffect (()=> {
+    handleInputFieldChange
+  },[selTimeslot]);
 
   useEffect (()=> {
     if(date) {
@@ -355,10 +361,11 @@ const Appointment = () => {
     const recaptchaToken = await handleRecaptchaExecution();
 
     if (recaptchaToken) {
+      const real_costs = price * (1-discount);
       try {
-        const response = await fetch("/api/contact", {
+        const response = await fetch("/api/booking", {
           method: "POST",
-          body: JSON.stringify({ ...formData, captcha: recaptchaToken }),
+          body: JSON.stringify({ ...formData, captcha: recaptchaToken, date:date, service:service, specs:specs, price:real_costs, timeslot:selTimeslot }),
           headers: {
             "Content-Type": "application/json",
           },
@@ -366,6 +373,9 @@ const Appointment = () => {
         if (response.ok) {
           setSuccess(true);
           setFormData({email:'', internalWash:false, name:'', surname:'', nr:'', state:'', street:'', zip:'', phone:''})
+          setService('bronze');
+          setSpecs('small');
+          setSelTimeslot('');
         } else {
           setError(true);
         }
@@ -380,6 +390,8 @@ const Appointment = () => {
     if (recaptchaRef.current) {
       recaptchaRef.current.reset(); // Reset to prepare for next execution
     }
+    handleTimeslots();
+    handleInputFieldChange
     setLoading(false);
   }
 
@@ -420,6 +432,13 @@ const Appointment = () => {
     <>
     <section>
     <Head imageSrc={'/images/white_chev.jpeg'} imageAlt={'Header Iimg'} heading={'Booking'} subtitle={'Manage your appointments with ease'} text={'Book a new appointment or cancel an existing one quickly and conveniently.'} btn={false}></Head>
+    </section>
+    <section>
+      <h1 className='mb-20 text-start w-full'>Price Reminder</h1>
+      <Prices></Prices>
+    </section>
+    <section>
+      <Sizing></Sizing>
     </section>
     <section className='text-left justify-start items-start'>
       <h2 className='p-8'>Book an appointment</h2>
@@ -589,8 +608,8 @@ const Appointment = () => {
               <p>Payment due after completion of the service</p>
             </div>
             <ReCAPTCHA ref={recaptchaRef} size='invisible' sitekey={client_sitekey!} onChange={setCaptcha}/>
-            <button className={`py-2 rounded-lg shadow-lg hover:brightness-[.97] ease-in-out transition-all duration-300 ${validForm ? 'pointer-events-auto cursor-pointer bg-green-300' : 'pointer-events-none bg-gray-50 opacity-50 '}`} type="submit">
-              {!loading ? (<p className='cursor-pointer text-dark min-w-0'>Book</p>) : (<Loading type={'text'}/>)}
+            <button className={`py-2 rounded-lg shadow-lg hover:brightness-[.97] ease-in-out transition-all duration-300 max-w-[300px] min-w-[300px] w-[300px] ${validForm ? 'pointer-events-auto cursor-pointer bg-green-300' : 'pointer-events-none bg-gray-50 opacity-50 '}`} type="submit">
+              {!loading ? (<p className='cursor-pointer text-dark'>Book</p>) : (<Loading type={'text'}/>)}
             </button>
           </div>
         </div>

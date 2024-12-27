@@ -8,8 +8,6 @@ type CookieObject = {
   };
 
 export async function deleteOldData() {
-    const sql = neon(process.env.DATABASE_URL!);
-
     const data = await sql`
         DELETE FROM consent_log
         WHERE timestamp::timestamp < NOW() - INTERVAL '1 year'

@@ -1,5 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { Resend } from 'resend';
+import { verifyCaptcha } from './captcha';
+import { send } from './send';
 
 function validateInput({email, surname, msg, name} : {email: string, surname: string, msg: string, name?: string}): boolean {
   var valid_buffer = false;
@@ -14,9 +15,23 @@ function validateInput({email, surname, msg, name} : {email: string, surname: st
 const messageRegex = /^[A-Za-z0-9À-ÖØ-ÿ\s.,?!@#$%^&*()_:~[\]|\\\/]{10,}$/; 
 const nameRegex = /^[A-Za-zÀ-ÖØ-ÿ\s'-.]{2,}$/;
 const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-const RECAPTCHA_SECRET_KEY = process.env.RECAPTCHA_SECRET_KEY;
 const emailToSend = process.env.EMAIL_TO!;
-const resend = new Resend(process.env.RESEND_API_KEY);
+
+export async function sendMail(email:string, name_space:string, surname:string, msg:string) {
+  const subject = 'Contact'
+  const msg_plain_user = 'Dear ' + name_space + surname + ' your contact request was successfully send.';
+  const msg_html_user = '<h2>Contact request:</h2><p>Your contact request was successfully send.</p>';
+  const msg_plain_admin = 'Contact request: From:' + name_space + surname + ' E-Mail: ' + email + ' Message: ' + msg;
+  const msg_html_admin = '<h2>Contact request:</h2><p>From:</p>' + name_space + surname + '</p><p>E-Mail: ' + email + '</p><p>Message: ' + msg + '</p>';
+
+  try {
+    await send(email, msg_plain_user, msg_html_user, subject);
+    await send(emailToSend, msg_plain_admin, msg_html_admin, subject);
+
+  } catch (error) {
+    throw error;
+  }
+}
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { body, method } = req;
@@ -42,40 +57,25 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
 
     try {
-      // Ping the google recaptcha verify API to verify the captcha code you received
-      const response = await fetch(
-        `https://www.google.com/recaptcha/api/siteverify?secret=${RECAPTCHA_SECRET_KEY}&response=${captcha}`,
-        {
-          headers: {
-            "Content-Type": "application/x-www-form-urlencoded; charset=utf-8",
-          },
-          method: "POST",
-        }
-      );
-      const captchaValidation = await response.json();
-      if (captchaValidation.success) {
-          try {
-            const mailState = await resend.emails.send({
-              from: 'Kontaktanfrage <onboarding@resend.dev>',
-              to: [emailToSend],
-              subject: 'Kontaktformular Homepage',
-              html: '<h2>Anfrage Kontaktformular:</h2><p>Von:</p>' + name_space + surname + '</p><p>E-Mail: ' + email + '</p><p>Nachricht: ' + msg + '</p>',
-              text: 'Anfrage Kontaktformular von' + name_space + surname + ' mit der E-Mail: '+ email + 'Nachricht: ' + msg,
-            });
-            if (mailState.error) {
-              return res.status(403).send("Mail Error");
-            }
-            return res.status(200).send("OK");
-            
-          } catch (error) {
-            return res.status(403).json({message: "Mail Error"});
-          }
+      const captchaValidation = await verifyCaptcha(captcha);
+
+      if (!captchaValidation.success) {
+          return res.status(400).json({
+              message: 'Captcha validation failed',
+              errors: captchaValidation['error-codes'],
+          });
       }
-      return res.status(422).json({
-        message: "Unproccesable request, Invalid captcha code"});
+
+      try {
+        await sendMail(email, name_space, surname, msg);
+        return res.status(200).json({ message: "Contact request sent successfully." });
+      } catch (emailError) {
+        console.error("Failed to send email:", emailError);
+        return res.status(500).json({ message: "Failed to send email" });
+      }
+
     } catch (error) {
-      console.log(error);
-      return res.status(422).json({ message: "Something went wrong" });
+      return res.status(423).json({ message: "Something went wrong" });
     }
   }
   // Return 404 if someone pings the API with a method other than

@@ -4,7 +4,6 @@ import {neon} from '@neondatabase/serverless';
 const sql = neon(process.env.DATABASE_URL!);
 
 async function getPostcodes(postcode: string): Promise<Postcode> {
-  const sql = neon(process.env.DATABASE_URL!);
   const result = await sql`
     SELECT *
     FROM postcodes
