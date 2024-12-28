@@ -23,7 +23,7 @@ const Sizing: React.FC<ContentSectionProps> = () => {
             </div>
             <div className="rounded-3xl shadow-lg bg-red-50 p-8 flex flex-col justify-center items-center text-center">
                 <h3 className='pb-4'>Large</h3>
-                <p>SUVs, vans, trucks, and other larger vehicles.</p>
+                <p>SUVs, vans, trucks, 4Runners and other larger vehicles.</p>
             </div>
         </div>
     </div>

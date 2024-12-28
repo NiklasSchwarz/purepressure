@@ -149,7 +149,7 @@ const ContactForm = () => {
                     type="text" id="name" name="name" onChange={handleChange} value={formData.name}/> <br/>
           </div>
           <div className="formContainer">   
-            <label className='formLabel' htmlFor="surname">Surname*:</label>
+            <label className='formLabel' htmlFor="surname">Last name*:</label>
             <input  className={`formInput border-b-2 border-fg border-opacity-10 
                                ${formDataValid!['surname'] && formData.surname.length > 0 ? 'border-2 border-green-300 border-opacity-80' : null}
                                ${!formDataValid!['surname'] && formData.surname.length > 0 ? 'border-2 border-red-300 border-opacity-80' : null}`} 
