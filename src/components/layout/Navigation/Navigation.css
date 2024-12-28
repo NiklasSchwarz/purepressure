@@ -32,7 +32,7 @@
     @apply py-4 bg-green-400 text-light font-bold;
   }
   
-  @media(max-width: 1024px){
+  @media(max-width: 1025px){
     .layoutNavigation > ul {
       padding-top: 33vh;
       @apply flex flex-col justify-start items-start gap-10      /*Layout*/
@@ -89,7 +89,7 @@
     background: transparent;
     border-radius: 10px;
     overflow: hidden;
-    @apply lg:hidden;
+    @apply min-[1025px]:hidden;
   }
 
  .layoutNavigationButton .hamburger {

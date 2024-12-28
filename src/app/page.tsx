@@ -6,6 +6,7 @@ import CardGrid from '@/components/ux/CardGrid/CardGrid'
 import TextImage from '@/components/ux/TextImage/TextImage'
 import Head from '@/components/ux/Head/Head'
 import Sizing from '@/components/ux/Prices/Sizing'
+import Review from '@/components/ux/Review/Review'
 
 export default function Home() {
   return ( 
@@ -32,8 +33,11 @@ export default function Home() {
       <section id="trash-can" className='hidden'>
         <TrashClean></TrashClean>
       </section>
-      <section>
+      <section className='hidden'>
         <About button_text='Book an appointment' image='/images/Steering_wheel.jpeg'></About>
+      </section>
+      <section className='hidden'>
+        <Review></Review>
       </section>
       <section id="last">
         <ContactForm></ContactForm>

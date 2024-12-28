@@ -5,7 +5,7 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 export async function send(email:string , msg_plain:string , msg_html:string , subject:string) {
     try {
         const send_mail = await resend.emails.send({
-            from: 'Pure Pressure Hawaii <onboarding@resend.dev>',
+            from: 'Pure Pressure Hawaii <no-reply@purepressurehawaii.com>',
             to: email,
             subject: subject,
             html: msg_html,

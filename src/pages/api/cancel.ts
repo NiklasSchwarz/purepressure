@@ -8,7 +8,7 @@ const sql = neon(process.env.DATABASE_URL!);
 export async function deleteAppointment(id_value:string) {
     const data = await sql`
         DELETE FROM appointments
-        WHERE id = ${id_value}
+        WHERE id = ${id_value} AND EXTRACT(EPOCH FROM (TO_TIMESTAMP(CONCAT(date, ' ', timeslot), 'DD-MM-YYYY HH:MI AM') - NOW())) / 3600 >= 48
         RETURNING *;
     `;
 
@@ -17,10 +17,10 @@ export async function deleteAppointment(id_value:string) {
 
 export async function sendMail(email:string, name_space:string, surname:string, name:string, id:string) {
   const subject = 'Appointment canceled'
-  const msg_plain_user = 'Dear ' + name_space + surname + ' your appointment was successfully canceled ';
-  const msg_html_user = '<h3>Appointment canceled</h3><p>Dear ' + name_space + surname + ' your Appointment was successfully canceled</p>';
-  const msg_plain_admin = name_space + surname + ' canceled his appointment: ' + id;
-  const msg_html_admin = '<h3>Appointment canceled:</h3><p>' + name_space + surname + 'canceled his Appointment: ' + id + '</p>';
+  const msg_plain_user = 'Dear ' + name_space + ' ' + surname + ' your appointment was successfully canceled ';
+  const msg_html_user = '<h3>Appointment canceled</h3><p>Dear ' + name_space + ' ' + surname + ' your Appointment was successfully canceled</p>';
+  const msg_plain_admin = name_space + ' ' + surname + ' canceled his appointment: ' + id;
+  const msg_html_admin = '<h3>Appointment canceled:</h3><p>' + name_space + ' ' + surname + ' canceled his Appointment: ' + id + '</p>';
 
   try {
     await send(email, msg_plain_user, msg_html_user, subject);

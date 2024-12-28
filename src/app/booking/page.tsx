@@ -135,6 +135,19 @@ async function getTimeslots(date: Date) {
   }
 }
 
+function isWeekend(date: Date) {
+  const day = date.getDay();
+  return day === 0 || day === 6; // 0 = Sunday, 6 = Saturday
+}
+
+function getNextWeekday(startDate: Date) {
+  const date = new Date(startDate);
+  while (isWeekend(date)) {
+    date.setDate(date.getDate() + 1);
+  }
+  return date;
+}
+
 const Appointment = () => {
   const [formData, setFormData] = useState({ name: '', surname: '', email: '', zip: '', nr:'', street:'', state:'', internalWash: true, phone:''});
   const [formDataCancel, setFormDataCancel] = useState({ name: '', surname: '', email: '', id: ''});
@@ -145,7 +158,8 @@ const Appointment = () => {
   const [service, setService] = useState("bronze")
   const [specs, setSpecs] = useState("small")
   const [selTrash, setSelTrash] = useState(false)
-  const [date, setDate] = React.useState<Date | undefined>(new Date())
+  const today = new Date();
+  const [date, setDate] = useState<Date>(getNextWeekday(today)); 
   const [multiplierZip, setMultiplier] = useState<number>(1)
   const [timeslots, setTimeslots] = useState<string[]>(["8:00 AM", "9:30 AM", "11:00 AM", "12:30 AM", "2:00 PM", "3:30 PM", "5:00 PM", "6:30 PM"])
   const [selTimeslot, setSelTimeslot] = useState<string | null>(null)
@@ -245,6 +259,12 @@ const Appointment = () => {
       }
     }
     setValidForm(Object.values(bufferValidation).every((isValid) => isValid === true) && trash_zip_relation && (selTimeslot !== null));
+  };
+
+  const handleSelectDate = (selectedDate: Date | undefined) => {
+    if (selectedDate) {
+      setDate(selectedDate);
+    }
   };
 
   const handleInputFieldChangeCancel = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -511,7 +531,7 @@ const Appointment = () => {
             selected={date}
             fromDate={new Date()}
             disabled = {(date: Date) => isWeekend(date)}
-            onSelect={setDate}
+            onSelect={handleSelectDate} 
             className="rounded-lg border bg-gray-50 shadow-lg w-fit h-fit"
             />
           <div className="timeslots-grid">
@@ -590,7 +610,7 @@ const Appointment = () => {
             <div className="req"><input type="text" id="surname" name="surname" className={`input-field border-b-2 border-opacity-50
                                ${formDataValid['surname'] ? 'border-green-300' : null}
                                ${!formDataValid!['surname'] ? 'border-red-300' : null}
-                               ${formData.surname.length == 0 ? 'border-neutral' : null}`}  required placeholder='Surname' onChange={handleInputFieldChange} value={formData.surname}/></div>
+                               ${formData.surname.length == 0 ? 'border-neutral' : null}`}  required placeholder='Last name' onChange={handleInputFieldChange} value={formData.surname}/></div>
             </div>
           </div>
         </div>
@@ -640,7 +660,7 @@ const Appointment = () => {
             <div className="req"><input type="text" id="surname" name="surname" className={`input-field border-b-2 border-opacity-50
                                ${formDataValidCancel['surname'] ? 'border-green-300' : null}
                                ${!formDataValidCancel!['surname'] ? 'border-red-300' : null}
-                               ${formDataCancel.surname.length == 0 ? 'border-neutral' : null}`}  required placeholder='Surname' onChange={handleInputFieldChangeCancel} value={formDataCancel.surname}/></div>
+                               ${formDataCancel.surname.length == 0 ? 'border-neutral' : null}`}  required placeholder='Last name' onChange={handleInputFieldChangeCancel} value={formDataCancel.surname}/></div>
             </div>
           </div>
           </div>
@@ -654,7 +674,7 @@ const Appointment = () => {
     <Modal msg='Your Appointment has been created successfully. Thank You!' type={1} show={success} />
     <Modal msg='An error occured. Please try again!' type={-1} show={error} />
     <Modal msg='The zip code is not within our reach' type={-1} show={error_zip} />
-    <Modal msg='No appointment found. Please try again our contact us!' type={-1} show={error3} />
+    <Modal msg='No appointment found, or you are attempting to cancel within 48 hours of your scheduled time. Please try again or contact us for assistance!' type={-1} show={error3} />
     <Modal msg='You canceled your appointment successfully.' type={1} show={success2} />
   </>
   );
